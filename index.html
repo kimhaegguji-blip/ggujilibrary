@@ -191,19 +191,13 @@
     </div>
 
     <script>
-      
-      // 🚨 아주 중요: 따옴표 안에 선생님의 구글 웹 앱 URL을 꼭 넣어주세요! 🚨
+      // 🚨 아주 중요: 따옴표 안에 선생님의 구글 웹 앱 URL이 이미 세팅되어 있습니다! 🚨
       const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQMPrsDFuybbp1PJ4Yh3LrF8KtvNcM3E_Q8DSIHfkSrDnEt9QJCaR_nWW5uD33PxnrIQ/exec";
       
       let lastReviewsDataString = "";
       let lastRanksDataString = "";
 
       function updateDashboard() {
-        if(GOOGLE_APP_SCRIPT_URL === "https://script.google.com/macros/s/AKfycbxQMPrsDFuybbp1PJ4Yh3LrF8KtvNcM3E_Q8DSIHfkSrDnEt9QJCaR_nWW5uD33PxnrIQ/exec") {
-          document.getElementById('reviews').innerHTML = "<p style='color:red; text-align:center;'>오류: 코드 하단에 구글 웹 앱 URL을 먼저 입력해주세요!</p>";
-          return;
-        }
-
         // 깃허브용 fetch 통신 (구글 시트에서 JSON 데이터 가져오기)
         fetch(GOOGLE_APP_SCRIPT_URL)
           .then(response => response.json())
