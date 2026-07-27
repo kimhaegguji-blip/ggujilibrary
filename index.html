@@ -140,6 +140,60 @@
       .qr-title { font-family: 'Jua', sans-serif; font-size: 1.6em; color: #1e293b; }
       .qr-sub { font-size: 1.05em; color: #475569; font-weight: 500; }
       .qr-code-img { width: 75px; height: 75px; border-radius: 8px; border: 1px solid #cbd5e1; padding: 3px; background: white; }
+
+      /* ⭐️ 모바일(스마트폰) 대응을 위한 반응형 스타일 ⭐️ */
+      @media screen and (max-width: 768px) {
+        body {
+          height: auto; 
+          min-height: 100vh;
+          overflow-y: auto; /* 스마트폰에서는 아래로 스크롤 할 수 있게 변경 */
+          padding: 10px;
+        }
+        .header {
+          font-size: 1.8em; /* 제목 크기 축소 */
+          padding: 10px;
+        }
+        .container {
+          flex-direction: column; /* 좌우 배치를 위아래 배치로 변경 */
+          gap: 15px;
+          height: auto;
+          overflow: visible;
+        }
+        .panel {
+          height: 450px; /* 위아래로 배치될 때 각각의 상자 높이 확보 */
+        }
+        .panel-title {
+          font-size: 1.4em;
+        }
+        
+        /* 모바일용 시상대 크기 자동 축소 */
+        .podium-container {
+          gap: 5px;
+          height: 220px;
+        }
+        .podium-step {
+          width: 30%; /* 남은 공간을 비율로 나눠 갖도록 변경 */
+        }
+        .step-1 { width: 38%; height: 170px; }
+        .step-2 { height: 130px; }
+        .step-3 { height: 95px; }
+        
+        .podium-score { font-size: 1.6em; }
+        .podium-medal { font-size: 2.2em; top: -35px; }
+        .podium-class { font-size: 1em; padding: 3px 8px; }
+
+        /* 하단 QR 바 세로 배치로 변경 */
+        .footer-qr-bar {
+          flex-direction: column;
+          text-align: center;
+          gap: 15px;
+          padding: 20px 15px;
+        }
+        .qr-code-img {
+          width: 120px;
+          height: 120px;
+        }
+      }
     </style>
   </head>
   <body>
