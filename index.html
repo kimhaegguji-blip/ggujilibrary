@@ -23,33 +23,38 @@
       .rank-panel { flex: 1; overflow: hidden; }
       .panel-title { font-family: 'Jua', sans-serif; color: #1e293b; font-size: 1.8em; margin-top: 0; border-bottom: 3px dashed #cbd5e1; padding-bottom: 8px; text-align: center; }
       .review-list-container { flex: 1; overflow: hidden; position: relative; padding-top: 5px; }
-      .review-card { background: #f8fafc; padding: 15px; margin-bottom: 12px; border-radius: 12px; border-left: 5px solid #3b82f6; will-change: margin-top; width: 100%; box-sizing: border-box; }
+      .review-card { background: #f8fafc; padding: 15px; margin-bottom: 12px; border-radius: 12px; border-left: 5px solid #3b82f6; width: 100%; box-sizing: border-box; }
       .review-title-group { display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 8px; gap: 4px; }
       .rv-cls { color: #64748b; font-weight: bold; font-size: 1.1em; }
       .rv-title-stars { display: flex; align-items: center; gap: 4px; }
       .rv-title { font-weight: bold; color: #0f172a; font-size: 1.2em; }
       .rv-stars { font-size: 1em; }
       .review-content { display: flex; align-items: flex-start; gap: 8px; }
-      .emotion-badge { background-color: #bfdbfe; color: #1e3a8a; padding: 4px 10px; border-radius: 20px; font-size: 0.9em; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.05); flex-shrink: 0; }
+      .emotion-badge { background-color: #bfdbfe; color: #1e3a8a; padding: 4px 10px; border-radius: 20px; font-size: 0.9em; font-weight: bold; flex-shrink: 0; }
       .review-text { color: #334155; font-size: 1.1em; line-height: 1.4; word-break: break-all; }
       .podium-container { display: flex; align-items: flex-end; justify-content: center; gap: 15px; height: 260px; margin-bottom: 15px; margin-top: 15px; }
-      .podium-step { display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding-top: 15px; border-radius: 15px 15px 0 0; width: 150px; text-align: center; box-shadow: inset 0 -10px 20px rgba(0,0,0,0.1); position: relative; }
-      .podium-medal { font-size: 3.5em; line-height: 1; margin-bottom: 5px; position: absolute; top: -45px; }
-      .podium-score { font-family: 'Noto Sans KR', sans-serif; font-size: 2.6em; font-weight: 900; color: #0f172a; margin-bottom: 12px; letter-spacing: -1px; line-height: 1; }
-      .podium-score span { font-size: 0.55em; font-weight: 700; color: #475569; margin-left: 2px; }
-      .podium-classes { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 8px; width: 100%; padding: 0 10px; box-sizing: border-box; }
-      .podium-class { font-family: 'Jua', sans-serif; font-size: 1.15em; color: #1e293b; background-color: rgba(255, 255, 255, 0.65); padding: 5px 12px; border-radius: 20px; word-break: keep-all; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-      .step-1 { height: 210px; background-color: #fde047; box-shadow: 0 -10px 20px rgba(250, 204, 21, 0.4); z-index: 10; width: 180px;}
+      .podium-step { display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding-top: 15px; border-radius: 15px 15px 0 0; width: 150px; text-align: center; position: relative; }
+      .podium-medal { font-size: 3.5em; position: absolute; top: -45px; }
+      .podium-score { font-family: 'Noto Sans KR', sans-serif; font-size: 2.6em; font-weight: 900; color: #0f172a; margin-bottom: 12px; }
+      .podium-score span { font-size: 0.55em; color: #475569; }
+      .podium-classes { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; width: 100%; padding: 0 10px; }
+      .podium-class { font-family: 'Jua', sans-serif; font-size: 1.15em; color: #1e293b; background: rgba(255,255,255,0.65); padding: 5px 12px; border-radius: 20px; }
+      .step-1 { height: 210px; background-color: #fde047; z-index: 10; width: 180px;}
       .step-2 { height: 150px; background-color: #e2e8f0; }
       .step-3 { height: 110px; background-color: #fed7aa; }
       .rank-list-container { flex: 1; overflow: hidden; background: #f1f5f9; border-radius: 15px; padding: 12px; }
       .rank-list { list-style: none; padding: 0; margin: 0; }
       .rank-item { font-size: 1.2em; padding: 10px 15px; border-bottom: 1px solid #cbd5e1; display: flex; justify-content: space-between; background: white; margin-bottom: 6px; border-radius: 8px; font-weight: bold; }
-      .footer-qr-bar { margin-top: 15px; background: white; padding: 10px 25px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; border: 3px dashed #4ade80; }
-      .qr-title { font-family: 'Jua', sans-serif; font-size: 1.6em; color: #1e293b; }
-      .qr-sub { font-size: 1.05em; color: #475569; font-weight: 500; }
-      .qr-code-img { width: 75px; height: 75px; border-radius: 8px; border: 1px solid #cbd5e1; padding: 3px; background: white; }
-      .footer-credit { text-align: center; font-size: 0.8em; color: #94a3b8; margin: 10px 0; font-family: 'Noto Sans KR', sans-serif; }
+      .footer-qr-bar { margin-top: 15px; background: white; padding: 15px 25px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; border: 3px dashed #4ade80; }
+      .qr-title { font-family: 'Jua', sans-serif; font-size: 1.6em; color: #1e293b; display: block; }
+      .qr-sub { font-size: 1.05em; color: #475569; display: block; margin-top: 4px; }
+      .qr-code-img { width: 75px; height: 75px; border-radius: 8px; }
+      .copyright { text-align: center; color: #94a3b8; font-size: 0.8em; margin-top: 15px; padding-bottom: 10px; }
+      @media screen and (max-width: 768px) {
+        .header { font-size: 6vw; }
+        .container { flex-direction: column; }
+        .footer-qr-bar { flex-direction: column; text-align: center; gap: 10px; }
+      }
     </style>
   </head>
   <body>
@@ -61,40 +66,34 @@
         <div class="review-list-container" id="reviews">데이터를 불러오는 중...</div>
       </div>
       <div class="panel rank-panel">
-        <h2 class="panel-title" id="podium-title">🏆 재미로 보는 독서 챔피언 학급</h2>
+        <h2 class="panel-title" id="podium-title">🏆 독서 챔피언 학급</h2>
         <div class="podium-container" id="podium"></div>
         <div class="rank-list-container"><ul id="ranking-list" class="rank-list"></ul></div>
       </div>
     </div>
     <div class="footer-qr-bar">
-      <div class="qr-info">
+      <div>
         <span class="qr-title">📲 나도 독서 감상평 남기기!</span>
         <span class="qr-sub">스마트폰 카메라로 QR 코드를 찍어서 등록해 보세요 📖</span>
       </div>
       <img class="qr-code-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://forms.gle/ZoRuuhFEaApeBNFo6" alt="QR">
     </div>
-    <div class="footer-credit">© 2026. FWANG all rights reserved.</div>
+    <div class="copyright">© 2026. FWANG all rights reserved.</div>
 
     <script>
-      const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQMPrsDFuybbp1PJ4Yh3LrF8KtvNcM3E_Q8DSIHfkSrDnEt9QJCaR_nWW5uD33PxnrIQ/exec";
-      function updateDashboard() {
-        fetch(GOOGLE_APP_SCRIPT_URL)
-          .then(response => response.json())
-          .then(data => drawDashboard(data))
-          .catch(e => console.error(e));
-      }
+      function updateDashboard() { google.script.run.withSuccessHandler(drawDashboard).getDashboardData(); }
       function drawDashboard(data) {
         const noticeBar = document.getElementById('notice-bar');
         if (data.notice && data.notice.trim() !== "") {
           document.getElementById('notice-text').innerText = data.notice;
           noticeBar.style.display = "block";
         } else { noticeBar.style.display = "none"; }
-
+        
         let reviewHtml = "";
         data.recentReviews.forEach(r => {
           reviewHtml += `<div class="review-card"><div class="review-title-group"><span class="rv-cls">[${r.cls}]</span><div class="rv-title-stars"><span class="rv-title">${r.title}</span><span class="rv-stars">${r.stars}</span></div></div><div class="review-content"><span class="emotion-badge">${r.emotion}</span><span class="review-text">${r.review}</span></div></div>`;
         });
-        document.getElementById('reviews').innerHTML = reviewHtml || "이번 달은 아직 등록된 감상평이 없어요!";
+        document.getElementById('reviews').innerHTML = reviewHtml || "아직 승인된 감상평이 없어요!";
         
         const podiumDiv = document.getElementById('podium');
         podiumDiv.innerHTML = "";
@@ -118,7 +117,10 @@
       setInterval(() => {
         const r = document.getElementById('reviews');
         if(r && r.children.length > 1) r.appendChild(r.firstElementChild);
+        const l = document.getElementById('ranking-list');
+        if(l && l.children.length > 1) l.appendChild(l.firstElementChild);
       }, 3000);
     </script>
   </body>
 </html>
+```eof
