@@ -109,16 +109,9 @@
       .qr-title { font-family: 'Jua', sans-serif; font-size: 1.6em; color: #1e293b; }
       .qr-sub { font-size: 1.05em; color: #475569; font-weight: 500; }
       .qr-code-img { width: 75px; height: 75px; border-radius: 8px; border: 1px solid #cbd5e1; padding: 3px; background: white; }
-
+      
       /* ⭐️ 저작권 문구용 CSS */
-      .copyright {
-        text-align: center; 
-        font-size: 0.8em; 
-        color: #94a3b8; 
-        margin-top: 15px; 
-        margin-bottom: 5px;
-        font-family: 'Noto Sans KR', sans-serif;
-      }
+      .copyright { text-align: center; font-size: 0.8em; color: #94a3b8; margin-top: 15px; margin-bottom: 5px; font-family: 'Noto Sans KR', sans-serif; }
 
       @media screen and (max-width: 768px) {
         body {
@@ -149,8 +142,10 @@
           height: max(100px, 12vh); 
           flex: none;
         }
+        
+        /* ⭐️ 모바일 전용: 소제목 글자 크기 키우기 (4.5vw -> 5.4vw) */
         .panel-title {
-          font-size: 4.5vw; 
+          font-size: 5.4vw; 
           white-space: nowrap;
           letter-spacing: -0.5px;
         }
@@ -225,6 +220,13 @@
 
         .footer-qr-bar { flex-direction: column; text-align: center; gap: 10px; padding: 15px; }
         .qr-code-img { width: 100px; height: 100px; }
+
+        /* ⭐️ 모바일 전용: 안내 문구가 무조건 1줄로 나오도록 설정 */
+        .qr-sub { 
+          font-size: 3.6vw; /* 스마트폰 가로 폭에 비례하여 크기 조절 */
+          white-space: nowrap; /* 2줄 바꿈 방지 */
+          letter-spacing: -0.5px;
+        }
       }
     </style>
   </head>
@@ -253,17 +255,16 @@
     <div class="footer-qr-bar">
       <div class="qr-info">
         <span class="qr-title">📲 나도 독서 감상평 남기기!</span>
-        <!-- ⭐️ 요청하신 대로 문구를 나누었습니다 -->
         <span class="qr-sub">스마트폰 카메라로 QR 코드를 찍어서 등록해 보세요 📖</span>
       </div>
       <img class="qr-code-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://forms.gle/ZoRuuhFEaApeBNFo6" alt="독서 감상평 구글 폼 QR코드">
     </div>
 
-    <!-- ⭐️ 가장 하단에 추가된 저작권 문구 -->
+    <!-- ⭐️ 저작권 문구 -->
     <div class="copyright">© 2026. FWANG all rights reserved.</div>
 
     <script>
-      // ⭐️ 데이터 연동을 위한 fetch 방식 원상복구! ⭐️
+      // ⭐️ 선생님의 구글 웹 앱 URL ⭐️
       const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQMPrsDFuybbp1PJ4Yh3LrF8KtvNcM3E_Q8DSIHfkSrDnEt9QJCaR_nWW5uD33PxnrIQ/exec";
       
       let lastReviewsDataString = "";
@@ -273,7 +274,6 @@
       document.getElementById('podium-title').innerText = `🏆 재미로 보는 ${currentMonth}월 독서 챔피언 학급`;
 
       function updateDashboard() {
-        // 이 fetch 함수가 데이터를 정상적으로 가져오는 핵심 역할입니다.
         fetch(GOOGLE_APP_SCRIPT_URL)
           .then(response => response.json())
           .then(data => drawDashboard(data))
@@ -281,7 +281,6 @@
       }
 
       function drawDashboard(data) {
-        // 공지사항 처리
         const noticeBar = document.getElementById('notice-bar');
         const noticeText = document.getElementById('notice-text');
         if (data.notice && data.notice.trim() !== "") {
