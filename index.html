@@ -3,85 +3,33 @@
   <head>
     <base target="_top">
     <meta charset="UTF-8">
-    <!-- ⭐️ 스마트폰 화면 비율 유지 및 앱처럼 보이게 하는 설정 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <!-- 모바일 기기 홈 화면 추가(앱 아이콘) 설정 -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="독서현황판">
-    <!-- 책 모양 아이콘 적용 -->
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2232/2232688.png"> 
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/2232/2232688.png">
-
-    <!-- 둥글고 귀여운 Jua 폰트와 깔끔한 Noto Sans 폰트 적용 -->
     <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
-      body { 
-        font-family: 'Noto Sans KR', sans-serif; 
-        background-color: #f0fdf4; 
-        margin: 0; 
-        padding: 20px; 
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        box-sizing: border-box;
-      }
-      .header { 
-        text-align: center; 
-        background: linear-gradient(90deg, #4ade80, #3b82f6);
-        color: white; 
-        padding: 12px; 
-        border-radius: 20px; 
-        margin-bottom: 10px; 
-        font-family: 'Jua', sans-serif;
-        font-size: 2.8em; 
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      }
-      
-      .notice-bar {
-        background-color: #ffe4e6;
-        color: #e11d48;
-        padding: 10px;
-        border-radius: 12px;
-        margin-bottom: 15px;
-        font-weight: bold;
-        font-size: 1.2em;
-        display: none; 
-        overflow: hidden;
-        white-space: nowrap;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        border: 2px solid #fda4af;
-      }
-      .marquee {
-        display: inline-block;
-        padding-left: 100%;
-        animation: marquee 20s linear infinite;
-      }
-      @keyframes marquee {
-        0% { transform: translate(0, 0); }
-        100% { transform: translate(-100%, 0); }
-      }
-
+      body { font-family: 'Noto Sans KR', sans-serif; background-color: #f0fdf4; margin: 0; padding: 20px; display: flex; flex-direction: column; height: 100vh; box-sizing: border-box; }
+      .header { text-align: center; background: linear-gradient(90deg, #4ade80, #3b82f6); color: white; padding: 12px; border-radius: 20px; margin-bottom: 10px; font-family: 'Jua', sans-serif; font-size: 2.8em; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+      .notice-bar { background-color: #ffe4e6; color: #e11d48; padding: 10px; border-radius: 12px; margin-bottom: 15px; font-weight: bold; font-size: 1.2em; display: none; overflow: hidden; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border: 2px solid #fda4af; }
+      .marquee { display: inline-block; padding-left: 100%; animation: marquee 20s linear infinite; }
+      @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
       .container { display: flex; gap: 20px; flex: 1; overflow: hidden; }
       .panel { background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
       
       .review-panel { flex: 1; overflow: hidden; }
       .rank-panel { flex: 1; overflow: hidden; }
-
       .panel-title { font-family: 'Jua', sans-serif; color: #1e293b; font-size: 1.8em; margin-top: 0; border-bottom: 3px dashed #cbd5e1; padding-bottom: 8px; text-align: center; }
-      
       .review-list-container { flex: 1; overflow: hidden; position: relative; padding-top: 5px; }
       .review-card { background: #f8fafc; padding: 15px; margin-bottom: 12px; border-radius: 12px; border-left: 5px solid #3b82f6; will-change: margin-top; width: 100%; box-sizing: border-box; }
-      
-      /* PC 기본 감상평 스타일 (가로로 한 줄 배치) */
       .review-title-group { display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 8px; gap: 4px; }
       .rv-cls { color: #64748b; font-weight: bold; font-size: 1.1em; }
       .rv-title-stars { display: flex; align-items: center; gap: 4px; }
       .rv-title { font-weight: bold; color: #0f172a; font-size: 1.2em; }
       .rv-stars { font-size: 1em; }
-      
       .review-content { display: flex; align-items: flex-start; gap: 8px; }
       .emotion-badge { background-color: #bfdbfe; color: #1e3a8a; padding: 4px 10px; border-radius: 20px; font-size: 0.9em; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.05); flex-shrink: 0; }
       .review-text { color: #334155; font-size: 1.1em; line-height: 1.4; word-break: break-all; }
@@ -91,8 +39,11 @@
       .podium-medal { font-size: 3.5em; line-height: 1; margin-bottom: 5px; position: absolute; top: -45px; }
       .podium-score { font-family: 'Noto Sans KR', sans-serif; font-size: 2.6em; font-weight: 900; color: #0f172a; margin-bottom: 12px; letter-spacing: -1px; line-height: 1; }
       .podium-score span { font-size: 0.55em; font-weight: 700; color: #475569; margin-left: 2px; }
-      .podium-classes { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 8px; width: 100%; padding: 0 10px; box-sizing: border-box; }
-      .podium-class { font-family: 'Jua', sans-serif; font-size: 1.15em; color: #1e293b; background-color: rgba(255, 255, 255, 0.65); padding: 5px 12px; border-radius: 20px; word-break: keep-all; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+      
+      /* ⭐️ 공동 순위를 위해 위아래로 배치 및 스크롤 영역 제한 */
+      .podium-classes-wrapper { width: 100%; max-height: 64px; overflow: hidden; position: relative; display: flex; flex-direction: column; align-items: center; }
+      .podium-classes { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; padding: 0 5px; box-sizing: border-box; }
+      .podium-class { font-family: 'Jua', sans-serif; font-size: 1.15em; color: #1e293b; background-color: rgba(255, 255, 255, 0.65); padding: 5px 12px; border-radius: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
       
       .step-1 { height: 210px; background-color: #fde047; box-shadow: 0 -10px 20px rgba(250, 204, 21, 0.4); z-index: 10; width: 180px;}
       .step-2 { height: 150px; background-color: #e2e8f0; }
@@ -109,108 +60,27 @@
       .qr-title { font-family: 'Jua', sans-serif; font-size: 1.6em; color: #1e293b; }
       .qr-sub { font-size: 1.05em; color: #475569; font-weight: 500; }
       .qr-code-img { width: 75px; height: 75px; border-radius: 8px; border: 1px solid #cbd5e1; padding: 3px; background: white; }
-
-      /* ⭐️ 저작권 문구용 CSS */
       .copyright { text-align: center; font-size: 0.8em; color: #94a3b8; margin-top: 15px; margin-bottom: 5px; font-family: 'Noto Sans KR', sans-serif; }
 
       @media screen and (max-width: 768px) {
-        body {
-          height: auto; 
-          min-height: 100vh;
-          overflow-y: auto; 
-          padding: 10px;
-        }
-        
-        /* ⭐️ 모바일 전용: 메인 타이틀 글자 크기 더 크게 키우기 (5vw -> 6.5vw) */
-        .header {
-          font-size: 6.5vw; 
-          padding: 12px 10px;
-          white-space: nowrap; 
-          letter-spacing: -1px;
-        }
-        
-        .container {
-          flex-direction: column; 
-          gap: 15px;
-          height: auto;
-          overflow: visible;
-        }
+        body { height: auto; min-height: 100vh; overflow-y: auto; padding: 10px; }
+        .header { font-size: 6.5vw; padding: 12px 10px; white-space: nowrap; letter-spacing: -1px; }
+        .container { flex-direction: column; gap: 15px; height: auto; overflow: visible; }
         .panel { height: auto; }
+        .review-list-container { height: max(220px, 25vh); flex: none; }
+        .rank-list-container { height: max(100px, 12vh); flex: none; }
+        .panel-title { font-size: 5.4vw; white-space: nowrap; letter-spacing: -0.5px; }
         
-        .review-list-container {
-          height: max(220px, 25vh); 
-          flex: none;
-        }
-        .rank-list-container {
-          height: max(100px, 12vh); 
-          flex: none;
-        }
-        
-        .panel-title {
-          font-size: 5.4vw; 
-          white-space: nowrap;
-          letter-spacing: -0.5px;
-        }
-        
-        /* 모바일 전용: 감상평 스마트 정렬 (조건부 줄바꿈 적용) */
         .review-card { padding: 12px; }
-        
-        .review-title-group {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 2px;
-        }
-        .rv-cls {
-          font-size: 0.9em;
-          margin: 0;
-        }
-        .rv-title-stars {
-          display: flex;
-          align-items: center;
-          width: 100%;
-          gap: 6px; 
-        }
-        .rv-title {
-          font-size: 1.15em; 
-          font-weight: 900;
-          color: #0f172a;
-          margin: 0;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          flex: 0 1 auto; 
-          min-width: 0; 
-        }
-        .rv-stars {
-          flex-shrink: 0; 
-          font-size: 0.9em;
-          margin: 0;
-        }
+        .review-title-group { flex-direction: column; align-items: flex-start; gap: 2px; }
+        .rv-cls { font-size: 0.9em; margin: 0; }
+        .rv-title-stars { display: flex; align-items: center; width: 100%; gap: 6px; }
+        .rv-title { font-size: 1.15em; font-weight: 900; color: #0f172a; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 0 1 auto; min-width: 0; }
+        .rv-stars { flex-shrink: 0; font-size: 0.9em; margin: 0; }
+        .review-content { display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 8px; width: 100%; }
+        .emotion-badge { padding: 4px 8px; font-size: 0.85em; flex-shrink: 0; }
+        .review-text { font-size: 1.05em; flex-shrink: 0; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        .review-content {
-          display: flex;
-          flex-direction: row;
-          flex-wrap: wrap; 
-          align-items: center;
-          gap: 6px;
-          margin-top: 8px; 
-          width: 100%;
-        }
-        .emotion-badge {
-          padding: 4px 8px;
-          font-size: 0.85em;
-          flex-shrink: 0; 
-        }
-        .review-text {
-          font-size: 1.05em;
-          flex-shrink: 0;  
-          max-width: 100%; 
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-
-        /* 모바일용 시상대 크기 자동 축소 */
         .podium-container { gap: 5px; height: 180px; margin-top: 25px; }
         .podium-step { width: 32%; }
         .step-1 { height: 140px; }
@@ -218,16 +88,14 @@
         .step-3 { height: 85px; }
         .podium-score { font-size: 1.4em; margin-bottom: 6px; }
         .podium-medal { font-size: 2em; top: -30px; }
+        
+        /* ⭐️ 모바일 환경 시상대 스크롤 영역 제한 최적화 */
+        .podium-classes-wrapper { max-height: 52px; } 
         .podium-class { font-size: 0.95em; padding: 3px 6px; }
 
         .footer-qr-bar { flex-direction: column; text-align: center; gap: 10px; padding: 15px; }
         .qr-code-img { width: 100px; height: 100px; }
-
-        .qr-sub { 
-          font-size: 3.6vw;
-          white-space: nowrap;
-          letter-spacing: -0.5px;
-        }
+        .qr-sub { font-size: 3.6vw; white-space: nowrap; letter-spacing: -0.5px; }
       }
     </style>
   </head>
@@ -289,6 +157,7 @@
           noticeBar.style.display = "none";
         }
 
+        /* 감상평 리스트 렌더링 */
         const currentReviewsString = JSON.stringify(data.recentReviews);
         if (lastReviewsDataString !== currentReviewsString) {
           let reviewHtml = "";
@@ -297,19 +166,12 @@
           } else {
             data.recentReviews.forEach(r => {
               let emotionHtml = r.emotion ? `<span class="emotion-badge">${r.emotion}</span>` : "";
-              
               reviewHtml += `<div class="review-card">
                 <div class="review-title-group">
                   <span class="rv-cls">[${r.cls}]</span>
-                  <div class="rv-title-stars">
-                    <span class="rv-title">${r.title}</span>
-                    <span class="rv-stars">${r.stars}</span>
-                  </div>
+                  <div class="rv-title-stars"><span class="rv-title">${r.title}</span><span class="rv-stars">${r.stars}</span></div>
                 </div>
-                <div class="review-content">
-                  ${emotionHtml}
-                  <span class="review-text">${r.review}</span>
-                </div>
+                <div class="review-content">${emotionHtml}<span class="review-text">${r.review}</span></div>
               </div>`;
             });
           }
@@ -317,6 +179,7 @@
           lastReviewsDataString = currentReviewsString;
         }
 
+        /* ⭐️ 시상대 공동 순위 렌더링 ⭐️ */
         const stats = data.classStats;
         const podiumDiv = document.getElementById('podium');
         
@@ -343,18 +206,23 @@
 
         function createPodiumStep(rankNumber, colorClass, medalIcon) {
           let classes = rankGroups[rankNumber];
-          if (classes.length === 0) {
+          if (!classes || classes.length === 0) {
              return `<div class="podium-step ${colorClass}" style="visibility:hidden;"></div>`;
           }
           let score = classes[0].count; 
           let classNamesHtml = classes.map(c => `<div class="podium-class">${c.className}</div>`).join("");
           let scoreColor = rankNumber === 1 ? 'color:#1e293b;' : ''; 
 
+          // 공동 3개 반 이상일 경우, 스크롤 애니메이션을 위한 ID 부여
+          let scrollId = classes.length > 2 ? `id="podium-scroll-${rankNumber}"` : "";
+
           return `
             <div class="podium-step ${colorClass}">
               <div class="podium-medal">${medalIcon}</div>
               <div class="podium-score" style="${scoreColor}">${score}<span>권</span></div>
-              <div class="podium-classes">${classNamesHtml}</div>
+              <div class="podium-classes-wrapper">
+                <div class="podium-classes" ${scrollId}>${classNamesHtml}</div>
+              </div>
             </div>`;
         }
 
@@ -371,15 +239,24 @@
 
       function scrollTicker(containerId) {
         const container = document.getElementById(containerId);
-        if (!container || container.children.length < 2) return;
+        if (!container) return;
+
+        // 시상대 스크롤의 경우 반이 2개 이하면 넘치지 않으므로 애니메이션 중지
+        if (containerId.startsWith('podium') && container.children.length <= 2) return;
+        if (container.children.length < 2) return;
 
         const firstChild = container.firstElementChild;
         const height = firstChild.offsetHeight;
-        const style = window.getComputedStyle(firstChild);
-        const marginBottom = parseFloat(style.marginBottom);
+        
+        // flexbox의 gap 속성과 marginBottom을 모두 고려하여 이동할 픽셀 계산
+        const style = window.getComputedStyle(container);
+        const gap = parseFloat(style.rowGap) || parseFloat(style.gap) || 0;
+        const marginBottom = parseFloat(window.getComputedStyle(firstChild).marginBottom) || 0;
+        
+        const totalShift = height + Math.max(gap, marginBottom);
 
         firstChild.style.transition = 'margin-top 0.5s ease-in-out';
-        firstChild.style.marginTop = `-${height + marginBottom}px`;
+        firstChild.style.marginTop = `-${totalShift}px`;
 
         setTimeout(() => {
           if (firstChild.parentNode === container) {
@@ -393,8 +270,12 @@
       updateDashboard();
       setInterval(updateDashboard, 10000); 
 
-      setInterval(() => scrollTicker('reviews'), 3000);
-      setInterval(() => scrollTicker('ranking-list'), 3000);
+      // ⭐️ 감상평, 랭킹 리스트, 시상대 1~3위 모든 영역 스크롤 주기적 실행
+      setInterval(() => {
+        ['reviews', 'ranking-list', 'podium-scroll-1', 'podium-scroll-2', 'podium-scroll-3'].forEach(id => {
+          scrollTicker(id);
+        });
+      }, 3000);
     </script>
   </body>
 </html>
