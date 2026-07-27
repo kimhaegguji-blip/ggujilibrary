@@ -11,8 +11,10 @@
           padding: 10px;
         }
         .header {
-          font-size: 1.8em; /* 제목 크기 축소 */
-          padding: 10px;
+          font-size: 5vw; /* ⭐️ 화면 너비에 비례하게 조절하여 무조건 한 줄로 */
+          padding: 12px 10px;
+          white-space: nowrap; /* ⭐️ 줄바꿈 강제 방지 */
+          letter-spacing: -1px;
         }
         .container {
           flex-direction: column; /* 좌우 배치를 위아래 배치로 변경 */
@@ -24,17 +26,19 @@
         .panel {
           height: auto; 
         }
-        /* ⭐️ 수정 2: 모바일에서 리스트 상자가 찌그러져 숨지 않도록 강제 높이 부여 */
+        /* ⭐️ 수정 2: 폰 화면 비율에 맞춰 안정적으로 보이도록 반응형 높이 적용 */
         .review-list-container {
-          height: 350px; 
+          height: max(220px, 25vh); /* 화면이 크면 더 많이, 작아도 최소 1~2개(220px) 노출 */
           flex: none;
         }
         .rank-list-container {
-          height: 220px; 
+          height: max(100px, 12vh); /* 최소 1~2개 노출, 화면 크면 자동 확장 */
           flex: none;
         }
         .panel-title {
-          font-size: 1.4em;
+          font-size: 4.5vw; /* ⭐️ 제목도 화면 너비에 맞춰 무조건 한 줄 고정 */
+          white-space: nowrap;
+          letter-spacing: -0.5px;
         }
         
         /* 모바일용 시상대 크기 자동 축소 */
