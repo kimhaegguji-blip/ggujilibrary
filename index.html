@@ -2,17 +2,14 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8">
-    <!-- 모바일 화면 비율 고정 및 앱처럼 보이기 위한 설정 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- 아이폰/안드로이드 홈 화면 추가 시 앱 아이콘 및 이름 설정 -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="독서현황판">
-    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2232/2232688.png"> <!-- 예쁜 책 모양 아이콘 -->
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2232/2232688.png"> 
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/2232/2232688.png">
 
-    <!-- 둥글고 귀여운 폰트 적용 -->
     <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
@@ -38,7 +35,6 @@
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       }
       
-      /* 공지사항 롤링 바 */
       .notice-bar {
         background-color: #ffe4e6;
         color: #e11d48;
@@ -105,7 +101,6 @@
       .qr-sub { font-size: 1.05em; color: #475569; font-weight: 500; }
       .qr-code-img { width: 75px; height: 75px; border-radius: 8px; border: 1px solid #cbd5e1; padding: 3px; background: white; }
 
-      /* ⭐️ 모바일(스마트폰) 대응을 위한 반응형 스타일 ⭐️ */
       @media screen and (max-width: 768px) {
         body {
           height: auto; 
@@ -114,9 +109,9 @@
           padding: 10px;
         }
         .header {
-          font-size: 6vw; /* ⭐️ 스마트폰 가로 크기에 맞춰 한 줄로 쏙 들어가게 조절 */
+          font-size: 5vw; 
           padding: 12px 10px;
-          white-space: nowrap; /* ⭐️ 강제로 줄바꿈 방지 */
+          white-space: nowrap; 
           letter-spacing: -1px;
         }
         .container {
@@ -128,23 +123,19 @@
         .panel {
           height: auto; 
         }
-        .panel-title {
-          font-size: 5vw; /* ⭐️ 패널 제목도 한 줄로 쏙 들어가게 조절 */
-          white-space: nowrap;
-          letter-spacing: -0.5px;
-        }
-        
-        /* ⭐️ 모바일에서 리스트가 찌그러지지 않게 최소 높이 강제 확보 */
         .review-list-container {
-          height: max(220px, 25vh); /* 최소 1~2개 감상평 보이게 보장 */
+          height: max(220px, 25vh); 
           flex: none;
         }
         .rank-list-container {
-          height: max(100px, 12vh); /* 최소 4위 반 1개 이상 보이게 보장 */
+          height: max(100px, 12vh); 
           flex: none;
         }
-        
-        /* 모바일용 시상대 크기 자동 축소 */
+        .panel-title {
+          font-size: 4.5vw; 
+          white-space: nowrap;
+          letter-spacing: -0.5px;
+        }
         .podium-container { gap: 5px; height: 180px; margin-top: 25px; }
         .podium-step { width: 32%; }
         .step-1 { height: 140px; }
@@ -186,19 +177,18 @@
         <span class="qr-title">📲 나도 독서 감상평 남기기!</span>
         <span class="qr-sub">스마트폰 카메라로 QR 코드를 찍어서 읽은 책의 감상평을 등록해 보세요 📖</span>
       </div>
-      <!-- 선생님이 만들어주신 단축 URL 적용 완료 -->
+      <!-- 선생님이 만들어주신 폼 단축 URL 적용 완료 -->
       <img class="qr-code-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://forms.gle/ZoRuuhFEaApeBNFo6" alt="독서 감상평 구글 폼 QR코드">
     </div>
 
     <script>
-      // 🚨 아주 중요: 따옴표 안에 선생님의 구글 웹 앱 URL이 이미 세팅되어 있습니다! 🚨
+      // 🚨 아주 중요: 따옴표 안에 선생님의 구글 웹 앱 URL이 이미 세팅되어 있습니다!
       const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQMPrsDFuybbp1PJ4Yh3LrF8KtvNcM3E_Q8DSIHfkSrDnEt9QJCaR_nWW5uD33PxnrIQ/exec";
       
       let lastReviewsDataString = "";
       let lastRanksDataString = "";
 
       function updateDashboard() {
-        // 깃허브용 fetch 통신 (구글 시트에서 JSON 데이터 가져오기)
         fetch(GOOGLE_APP_SCRIPT_URL)
           .then(response => response.json())
           .then(data => drawDashboard(data))
@@ -206,7 +196,7 @@
       }
 
       function drawDashboard(data) {
-        // 0. 공지사항 그리기
+        // 공지사항 
         const noticeBar = document.getElementById('notice-bar');
         const noticeText = document.getElementById('notice-text');
         if (data.notice && data.notice.trim() !== "") {
@@ -216,7 +206,6 @@
           noticeBar.style.display = "none";
         }
 
-        // 1. 리뷰 데이터 그리기 
         const currentReviewsString = JSON.stringify(data.recentReviews);
         if (lastReviewsDataString !== currentReviewsString) {
           let reviewHtml = "";
@@ -238,7 +227,6 @@
           lastReviewsDataString = currentReviewsString;
         }
 
-        // 2. 시상대 및 순위 그리기
         const stats = data.classStats;
         const podiumDiv = document.getElementById('podium');
         
@@ -291,7 +279,6 @@
         }
       }
 
-      // ⭐️ 유령(중복) 복사 방지 기능이 포함된 롤링 애니메이션
       function scrollTicker(containerId) {
         const container = document.getElementById(containerId);
         if (!container || container.children.length < 2) return;
@@ -305,7 +292,6 @@
         firstChild.style.marginTop = `-${height + marginBottom}px`;
 
         setTimeout(() => {
-          // 데이터가 새로고침되어 요소가 바뀌지 않았을 때만 뒤로 이동 (중복 버그 완벽 차단)
           if (firstChild.parentNode === container) {
             firstChild.style.transition = 'none';
             firstChild.style.marginTop = '0';
@@ -314,13 +300,9 @@
         }, 500); 
       }
 
-      // 페이지 로드 시 최초 데이터 가져오기
       updateDashboard();
-      
-      // 10초마다 백그라운드에서 데이터 새로고침
       setInterval(updateDashboard, 10000); 
 
-      // 3초마다 위로 한 칸씩 올리기
       setInterval(() => scrollTicker('reviews'), 3000);
       setInterval(() => scrollTicker('ranking-list'), 3000);
     </script>
