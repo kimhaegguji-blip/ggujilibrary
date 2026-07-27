@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
+    <base target="_top">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
+    <!-- 모바일 기기 홈 화면 추가(앱 아이콘) 설정 -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="독서현황판">
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2232/2232688.png"> 
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/2232/2232688.png">
 
+    <!-- 둥글고 귀여운 Jua 폰트와 깔끔한 Noto Sans 폰트 적용 -->
     <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
@@ -35,6 +38,7 @@
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       }
       
+      /* 공지사항 롤링 바 */
       .notice-bar {
         background-color: #ffe4e6;
         color: #e11d48;
@@ -76,10 +80,11 @@
       .rv-cls { margin-right: 4px; }
       .rv-title { margin-right: 4px; }
       
-      .review-content { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
-      .emotion-badge { background-color: #bfdbfe; color: #1e3a8a; padding: 4px 10px; border-radius: 20px; font-size: 0.9em; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+      .review-content { display: flex; align-items: flex-start; gap: 8px; }
+      .emotion-badge { background-color: #bfdbfe; color: #1e3a8a; padding: 4px 10px; border-radius: 20px; font-size: 0.9em; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.05); flex-shrink: 0; }
       .review-text { color: #334155; font-size: 1.1em; line-height: 1.4; }
       
+      /* 3D 모던 시상대 스타일 */
       .podium-container { display: flex; align-items: flex-end; justify-content: center; gap: 15px; height: 260px; margin-bottom: 15px; margin-top: 15px; }
       .podium-step { display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding-top: 15px; border-radius: 15px 15px 0 0; width: 150px; text-align: center; box-shadow: inset 0 -10px 20px rgba(0,0,0,0.1); position: relative; }
       .podium-medal { font-size: 3.5em; line-height: 1; margin-bottom: 5px; position: absolute; top: -45px; }
@@ -94,18 +99,21 @@
       .step-2 { height: 150px; background-color: #e2e8f0; }
       .step-3 { height: 110px; background-color: #fed7aa; }
 
+      /* 순위 리스트 */
       .rank-list-container { flex: 1; overflow: hidden; background: #f1f5f9; border-radius: 15px; padding: 12px; }
       .rank-list { list-style: none; padding: 0; margin: 0; }
       .rank-item { font-size: 1.2em; padding: 10px 15px; border-bottom: 1px solid #cbd5e1; display: flex; justify-content: space-between; background: white; margin-bottom: 6px; border-radius: 8px; font-weight: bold; will-change: margin-top; }
       .rank-item span.class-name { color: #334155; }
       .rank-item span.score { color: #059669; }
 
+      /* QR 바 */
       .footer-qr-bar { margin-top: 15px; background: white; padding: 10px 25px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; border: 3px dashed #4ade80; }
       .qr-info { display: flex; flex-direction: column; gap: 4px; }
       .qr-title { font-family: 'Jua', sans-serif; font-size: 1.6em; color: #1e293b; }
       .qr-sub { font-size: 1.05em; color: #475569; font-weight: 500; }
       .qr-code-img { width: 75px; height: 75px; border-radius: 8px; border: 1px solid #cbd5e1; padding: 3px; background: white; }
 
+      /* ⭐️ 모바일(스마트폰) 대응을 위한 반응형 스타일 ⭐️ */
       @media screen and (max-width: 768px) {
         body {
           height: auto; 
@@ -125,9 +133,8 @@
           height: auto;
           overflow: visible;
         }
-        .panel {
-          height: auto; 
-        }
+        .panel { height: auto; }
+        
         .review-list-container {
           height: max(220px, 25vh); 
           flex: none;
@@ -142,32 +149,66 @@
           letter-spacing: -0.5px;
         }
         
-        /* ⭐️ 모바일 전용: 감상평 제목 정갈하게 정렬 */
+        /* ⭐️ 모바일 전용: 감상평 3줄 완벽 분리 정렬 ⭐️ */
+        .review-card { padding: 12px; }
+        
         .review-title {
-          display: flex;
-          flex-wrap: wrap;
-          align-items: flex-start;
-          margin-bottom: 10px;
+          display: grid;
+          /* 1열은 학반 크기만큼, 2열은 별점이 차지 */
+          grid-template-columns: max-content 1fr;
+          grid-template-areas:
+            "cls stars"
+            "title title";
+          row-gap: 6px;
+          column-gap: 8px;
+          margin-bottom: 8px;
+          align-items: center;
         }
         .rv-cls {
-          width: 100%; /* 학반을 단독 첫 줄로 올림 */
-          font-size: 0.85em;
+          grid-area: cls;
+          width: auto;
+          font-size: 0.9em;
           color: #64748b;
-          margin-bottom: 4px;
-        }
-        .rv-title {
-          flex: 1; /* 남은 가로 공간을 모두 차지 */
-          font-size: 1.05em;
-          line-height: 1.3;
-          word-break: keep-all; /* 단어 단위로 예쁘게 줄바꿈 */
-          padding-right: 8px;
+          margin: 0;
         }
         .rv-stars {
-          font-size: 0.9em;
-          white-space: nowrap; /* 별점은 줄바꿈 안 됨 */
-          margin-top: 2px;
+          grid-area: stars;
+          font-size: 0.85em;
+          margin: 0;
+          text-align: left; /* 학반 바로 옆에 밀착 */
+        }
+        .rv-title {
+          grid-area: title;
+          /* 글씨 크기 폰 너비에 맞춰 자동 조절(clamp), 학반보단 크고 최대 1.25em 제한 */
+          font-size: clamp(15px, 4.5vw, 1.25em); 
+          font-weight: 900;
+          color: #0f172a;
+          line-height: 1.2;
+          margin: 0;
+          /* 엄청 긴 제목이라도 무조건 한 줄 유지 및 말줄임표(...) 처리 */
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
+        .review-content {
+          /* 기분 배지와 한 줄 평을 3번째 줄에 가로로 나란히 배치 */
+          display: flex;
+          align-items: flex-start;
+          gap: 6px;
+        }
+        .emotion-badge {
+          flex-shrink: 0; /* 배지가 찌그러지지 않도록 */
+          padding: 4px 8px;
+          font-size: 0.85em;
+        }
+        .review-text {
+          font-size: 1.05em;
+          line-height: 1.35;
+          word-break: keep-all;
+        }
+
+        /* 모바일용 시상대 크기 자동 축소 */
         .podium-container { gap: 5px; height: 180px; margin-top: 25px; }
         .podium-step { width: 32%; }
         .step-1 { height: 140px; }
@@ -213,7 +254,7 @@
     </div>
 
     <script>
-      // 선생님의 구글 웹 앱 주소
+      // ⭐️ 선생님의 구글 웹 앱 주소가 입력되어 있습니다!
       const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQMPrsDFuybbp1PJ4Yh3LrF8KtvNcM3E_Q8DSIHfkSrDnEt9QJCaR_nWW5uD33PxnrIQ/exec";
       
       let lastReviewsDataString = "";
@@ -227,7 +268,6 @@
       }
 
       function drawDashboard(data) {
-        // 공지사항 
         const noticeBar = document.getElementById('notice-bar');
         const noticeText = document.getElementById('notice-text');
         if (data.notice && data.notice.trim() !== "") {
@@ -237,7 +277,6 @@
           noticeBar.style.display = "none";
         }
 
-        // 리뷰 데이터 갱신
         const currentReviewsString = JSON.stringify(data.recentReviews);
         if (lastReviewsDataString !== currentReviewsString) {
           let reviewHtml = "";
@@ -246,7 +285,7 @@
           } else {
             data.recentReviews.forEach(r => {
               let emotionHtml = r.emotion ? `<span class="emotion-badge">${r.emotion}</span>` : "";
-              // ⭐️ HTML 구조 변경: 모바일에서 각각 스타일을 적용할 수 있도록 span 태그로 감쌈
+              // HTML 구조는 유지하되 CSS Grid를 통해 모바일에서 3줄로 분리되도록 설계됨
               reviewHtml += `<div class="review-card">
                 <div class="review-title">
                   <span class="rv-cls">[${r.cls}]</span>
@@ -264,7 +303,6 @@
           lastReviewsDataString = currentReviewsString;
         }
 
-        // 시상대 및 순위 갱신
         const stats = data.classStats;
         const podiumDiv = document.getElementById('podium');
         
@@ -330,7 +368,6 @@
         firstChild.style.marginTop = `-${height + marginBottom}px`;
 
         setTimeout(() => {
-          // 애니메이션 도중 데이터가 갱신되어 요소가 삭제되었을 때의 오류 방지
           if (firstChild.parentNode === container) {
             firstChild.style.transition = 'none';
             firstChild.style.marginTop = '0';
