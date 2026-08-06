@@ -109,19 +109,17 @@
       .qr-sub { font-size: 1.05em; color: #475569; font-weight: 500; }
       .qr-code-img { width: 75px; height: 75px; border-radius: 8px; border: 1px solid #cbd5e1; padding: 3px; background: white; flex-shrink: 0; }
       
-      /* ⭐️ PC 환경용 하단 고정 버튼 (방법 1) */
       .desktop-action-btns { display: flex; gap: 12px; margin-left: auto; margin-right: 25px; }
       .action-btn { display: flex; align-items: center; justify-content: center; padding: 10px 18px; border-radius: 25px; font-family: 'Jua', sans-serif; font-size: 1.2em; color: white; border: none; cursor: pointer; text-decoration: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s; white-space: nowrap; }
       .action-btn:active { transform: scale(0.95); }
+      .btn-share { background: linear-gradient(135deg, #a855f7, #9333ea); }
       .btn-form { background: linear-gradient(135deg, #3b82f6, #2563eb); }
       .btn-install { background: linear-gradient(135deg, #10b981, #059669); }
 
-      /* ⭐️ 모바일 환경용 플로팅 버튼 (기본 숨김) */
       .floating-menu { display: none; }
 
       .copyright { text-align: center; font-size: 0.8em; color: #94a3b8; margin-top: 15px; margin-bottom: 5px; font-family: 'Noto Sans KR', sans-serif; }
 
-      /* 앱 설치 안내 모달(팝업) 스타일 */
       .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px; box-sizing: border-box; backdrop-filter: blur(3px); }
       .modal-content { background: white; padding: 30px; border-radius: 20px; width: 100%; max-width: 400px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.2); text-align: center; }
       .modal-title { font-family: 'Jua', sans-serif; font-size: 1.8em; color: #1e293b; margin-top: 0; margin-bottom: 15px; }
@@ -133,8 +131,34 @@
       .close-btn { background: #e2e8f0; color: #475569; border: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; font-size: 1.1em; cursor: pointer; width: 100%; margin-top: 10px; transition: background 0.2s; }
       .close-btn:hover { background: #cbd5e1; }
 
+      /* 자체 제작 알림창(토스트) 스타일 */
+      .toast-message {
+        position: fixed;
+        bottom: 50%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        background: rgba(30, 41, 59, 0.95);
+        color: #4ade80;
+        padding: 15px 30px;
+        border-radius: 30px;
+        font-family: 'Jua', sans-serif;
+        font-size: 1.3em;
+        white-space: nowrap;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s, transform 0.3s;
+        z-index: 2000;
+        pointer-events: none;
+      }
+      .toast-message.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(-50%, 0);
+      }
+
       @media screen and (max-width: 768px) {
-        body { height: auto; min-height: 100vh; overflow-y: auto; padding: 10px; padding-bottom: 100px; /* 플로팅 버튼 가리지 않게 하단 여백 추가 */ }
+        body { height: auto; min-height: 100vh; overflow-y: auto; padding: 10px; padding-bottom: 120px; }
         .header { font-size: 6.5vw; padding: 12px 10px; white-space: nowrap; letter-spacing: -1px; }
         .container { flex-direction: column; gap: 15px; height: auto; overflow: visible; }
         .panel { height: auto; }
@@ -162,15 +186,13 @@
         .podium-medal { font-size: 2em; top: -30px; }
         .podium-class { font-size: 0.95em; padding: 3px 6px; }
         
-        /* ⭐️ 모바일에서는 PC용 하단 버튼 숨기고 QR정보를 꽉 차게 변경 */
         .desktop-action-btns { display: none; }
         .footer-qr-bar { flex-direction: column; text-align: center; gap: 10px; padding: 15px; }
         .qr-code-img { width: 100px; height: 100px; }
         .qr-sub { font-size: 3.6vw; white-space: nowrap; letter-spacing: -0.5px; }
         
-        /* ⭐️ 모바일에서만 우측 하단 플로팅 메뉴 표시 */
         .floating-menu { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 100; }
-        .fab-btn { display: flex; align-items: center; justify-content: center; padding: 12px 20px; border-radius: 30px; font-family: 'Jua', sans-serif; font-size: 1.2em; color: white; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.2); cursor: pointer; transition: transform 0.2s; text-decoration: none; }
+        .fab-btn { display: flex; align-items: center; justify-content: center; padding: 12px 20px; border-radius: 30px; font-family: 'Jua', sans-serif; font-size: 1.1em; color: white; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.2); cursor: pointer; transition: transform 0.2s; text-decoration: none; }
         .fab-btn:active { transform: scale(0.95); }
       }
     </style>
@@ -197,21 +219,16 @@
       </div>
     </div>
 
-    <!-- ⭐️ PC용 버튼이 추가된 하단 QR코드 안내 바 -->
     <div class="footer-qr-bar">
       <div class="qr-info">
         <span class="qr-title">📲 나도 독서 감상평 남기기!</span>
         <span class="qr-sub">스마트폰 카메라로 QR 코드를 찍어서 등록해 보세요 📖</span>
       </div>
       
-      <!-- ⭐️ 데스크탑 전용 버튼 영역 -->
       <div class="desktop-action-btns">
-        <a href="https://forms.gle/ZoRuuhFEaApeBNFo6" target="_blank" class="action-btn btn-form">
-          ✏️ 감상평 남기기
-        </a>
-        <button class="action-btn btn-install" onclick="document.getElementById('installModal').style.display='flex'">
-          💻 바탕화면에 설치
-        </button>
+        <button class="action-btn btn-share" onclick="shareApp()">🔗 링크 공유</button>
+        <a href="https://forms.gle/ZoRuuhFEaApeBNFo6" target="_blank" class="action-btn btn-form">✏️ 감상평 남기기</a>
+        <button class="action-btn btn-install" onclick="document.getElementById('installModal').style.display='flex'">💻 바탕화면에 설치</button>
       </div>
 
       <img class="qr-code-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://forms.gle/ZoRuuhFEaApeBNFo6" alt="독서 감상평 구글 폼 QR코드">
@@ -219,17 +236,15 @@
 
     <div class="copyright">© 2026. FWANG all rights reserved.</div>
 
-    <!-- ⭐️ 모바일 전용 플로팅 메뉴 버튼 -->
     <div class="floating-menu">
-      <a href="https://forms.gle/ZoRuuhFEaApeBNFo6" target="_blank" class="fab-btn btn-form">
-        ✏️ 감상평 남기기
-      </a>
-      <button class="fab-btn btn-install" onclick="document.getElementById('installModal').style.display='flex'">
-        📱 앱 설치하기
-      </button>
+      <button class="fab-btn btn-share" onclick="shareApp()">🔗 공유하기</button>
+      <a href="https://forms.gle/ZoRuuhFEaApeBNFo6" target="_blank" class="fab-btn btn-form">✏️ 감상평 남기기</a>
+      <button class="fab-btn btn-install" onclick="document.getElementById('installModal').style.display='flex'">📱 앱 설치하기</button>
     </div>
 
-    <!-- ⭐️ 기기별 설치 안내 모달(팝업) -->
+    <!-- 자체 제작 토스트 알림창 -->
+    <div id="custom-toast" class="toast-message">✨ 현황판 링크가 복사되었습니다! ✨</div>
+
     <div id="installModal" class="modal-overlay">
       <div class="modal-content">
         <h3 class="modal-title">바탕화면에 바로가기 설치 ✨</h3>
@@ -271,6 +286,39 @@
       const currentMonth = new Date().getMonth() + 1;
       document.getElementById('podium-title').innerText = `🏆 재미로 보는 ${currentMonth}월 독서 챔피언 학급`;
 
+      // 🔗 앱 링크 공유 기능
+      function shareApp() {
+        const shareUrl = "https://kimhaegguji-blip.github.io/ggujilibrary/";
+        const shareTitle = "독서 마라톤 챔피언 현황판";
+        const shareText = "우리 학교 독서 마라톤 현황판을 확인하고 감상평을 남겨보세요!";
+
+        if (navigator.share) {
+          // 스마트폰에서는 카카오톡, 메시지 등 기본 공유창 띄우기
+          navigator.share({
+            title: shareTitle,
+            text: shareText,
+            url: shareUrl
+          }).catch((error) => console.log('공유 실패 또는 취소:', error));
+        } else {
+          // PC 등 공유 API 미지원 환경에서는 클립보드에 복사 후 알림창(토스트) 띄우기
+          const textArea = document.createElement("textarea");
+          textArea.value = shareUrl;
+          document.body.appendChild(textArea);
+          textArea.select();
+          try {
+            document.execCommand('copy');
+            const toast = document.getElementById('custom-toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+              toast.classList.remove('show');
+            }, 2500); // 2.5초 후 알림창 사라짐
+          } catch (err) {
+            console.error('클립보드 복사 실패', err);
+          }
+          document.body.removeChild(textArea);
+        }
+      }
+
       function updateDashboard() {
         fetch(GOOGLE_APP_SCRIPT_URL)
           .then(response => response.json())
@@ -296,6 +344,7 @@
           } else {
             data.recentReviews.forEach(r => {
               let emotionHtml = r.emotion ? `<span class="emotion-badge">${r.emotion}</span>` : "";
+              
               reviewHtml += `<div class="review-card">
                 <div class="review-title-group">
                   <span class="rv-cls">[${r.cls}]</span>
@@ -339,14 +388,14 @@
           }
         });
 
-        // 상위 3개 클래스를 독립적인 단상에 배치하는 로직
+        // ⭐️ 선생님의 아이디어 반영: 상위 3개 클래스를 독립적인 단상에 배치
         let top3Classes = [];
         for (let r = 1; r <= 3; r++) {
           rankGroups[r].forEach(cls => {
             top3Classes.push({ rank: r, data: cls });
           });
         }
-        top3Classes = top3Classes.slice(0, 3); // 3개 단상까지만 보여줌
+        top3Classes = top3Classes.slice(0, 3); 
 
         if (top3Classes.length === 0) {
            podiumDiv.innerHTML = "";
