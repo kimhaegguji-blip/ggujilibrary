@@ -75,7 +75,6 @@
       .review-list-container { flex: 1; overflow: hidden; position: relative; padding-top: 5px; }
       .review-card { background: #f8fafc; padding: 15px; margin-bottom: 12px; border-radius: 12px; border-left: 5px solid #3b82f6; will-change: margin-top; width: 100%; box-sizing: border-box; }
       
-      /* PC 기본 감상평 스타일 (가로로 한 줄 배치) */
       .review-title-group { display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 8px; gap: 4px; }
       .rv-cls { color: #64748b; font-weight: bold; font-size: 1.1em; }
       .rv-title-stars { display: flex; align-items: center; gap: 4px; }
@@ -109,116 +108,42 @@
       .qr-title { font-family: 'Jua', sans-serif; font-size: 1.6em; color: #1e293b; }
       .qr-sub { font-size: 1.05em; color: #475569; font-weight: 500; }
       .qr-code-img { width: 75px; height: 75px; border-radius: 8px; border: 1px solid #cbd5e1; padding: 3px; background: white; }
+      .copyright { text-align: center; font-size: 0.8em; color: #94a3b8; margin-top: 15px; margin-bottom: 5px; font-family: 'Noto Sans KR', sans-serif; }
 
-      /* ⭐️ 저작권 문구용 CSS */
-      .copyright {
-        text-align: center; 
-        font-size: 0.8em; 
-        color: #94a3b8; 
-        margin-top: 15px; 
-        margin-bottom: 5px;
-        font-family: 'Noto Sans KR', sans-serif;
-      }
+      /* ⭐️ 새로 추가된 플로팅 버튼 스타일 */
+      .floating-menu { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 100; }
+      .fab-btn { display: flex; align-items: center; justify-content: center; padding: 12px 20px; border-radius: 30px; font-family: 'Jua', sans-serif; font-size: 1.2em; color: white; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.2); cursor: pointer; transition: transform 0.2s; text-decoration: none; }
+      .fab-btn:active { transform: scale(0.95); }
+      .btn-form { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+      .btn-install { background: linear-gradient(135deg, #10b981, #059669); }
+
+      /* ⭐️ 새로 추가된 앱 설치 안내 모달(팝업) 스타일 */
+      .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px; box-sizing: border-box; backdrop-filter: blur(3px); }
+      .modal-content { background: white; padding: 30px; border-radius: 20px; width: 100%; max-width: 400px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); text-align: center; }
+      .modal-title { font-family: 'Jua', sans-serif; font-size: 1.8em; color: #1e293b; margin-top: 0; margin-bottom: 20px; }
+      .os-guide { background: #f8fafc; border-radius: 12px; padding: 15px; margin-bottom: 15px; text-align: left; border-left: 5px solid #3b82f6; }
+      .os-guide.android { border-left-color: #10b981; }
+      .os-title { font-weight: 900; font-size: 1.1em; color: #334155; margin-bottom: 5px; }
+      .os-desc { color: #475569; font-size: 0.95em; line-height: 1.5; }
+      .close-btn { background: #e2e8f0; color: #475569; border: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; font-size: 1.1em; cursor: pointer; width: 100%; margin-top: 10px; }
 
       @media screen and (max-width: 768px) {
-        body {
-          height: auto; 
-          min-height: 100vh;
-          overflow-y: auto; 
-          padding: 10px;
-        }
-        
-        /* ⭐️ 모바일 전용: 메인 타이틀 글자 크기 더 크게 (선생님 요청사항) */
-        .header {
-          font-size: 6.5vw; 
-          padding: 12px 10px;
-          white-space: nowrap; 
-          letter-spacing: -1px;
-        }
-        
-        .container {
-          flex-direction: column; 
-          gap: 15px;
-          height: auto;
-          overflow: visible;
-        }
+        body { height: auto; min-height: 100vh; overflow-y: auto; padding: 10px; padding-bottom: 100px; /* 플로팅 버튼 가리지 않게 하단 여백 추가 */ }
+        .header { font-size: 6.5vw; padding: 12px 10px; white-space: nowrap; letter-spacing: -1px; }
+        .container { flex-direction: column; gap: 15px; height: auto; overflow: visible; }
         .panel { height: auto; }
-        
-        .review-list-container {
-          height: max(220px, 25vh); 
-          flex: none;
-        }
-        .rank-list-container {
-          height: max(100px, 12vh); 
-          flex: none;
-        }
-        
-        /* ⭐️ 모바일 전용: 소제목 글자 크기 더 크게 (선생님 요청사항) */
-        .panel-title {
-          font-size: 5.4vw; 
-          white-space: nowrap;
-          letter-spacing: -0.5px;
-        }
-        
-        /* 모바일 전용: 감상평 스마트 정렬 (조건부 줄바꿈 적용) */
+        .review-list-container { height: max(220px, 25vh); flex: none; }
+        .rank-list-container { height: max(100px, 12vh); flex: none; }
+        .panel-title { font-size: 5.4vw; white-space: nowrap; letter-spacing: -0.5px; }
         .review-card { padding: 12px; }
-        
-        .review-title-group {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 2px;
-        }
-        .rv-cls {
-          font-size: 0.9em;
-          margin: 0;
-        }
-        .rv-title-stars {
-          display: flex;
-          align-items: center;
-          width: 100%;
-          gap: 6px; 
-        }
-        .rv-title {
-          font-size: 1.15em; 
-          font-weight: 900;
-          color: #0f172a;
-          margin: 0;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          flex: 0 1 auto; 
-          min-width: 0; 
-        }
-        .rv-stars {
-          flex-shrink: 0; 
-          font-size: 0.9em;
-          margin: 0;
-        }
-
-        .review-content {
-          display: flex;
-          flex-direction: row;
-          flex-wrap: wrap; 
-          align-items: center;
-          gap: 6px;
-          margin-top: 8px; 
-          width: 100%;
-        }
-        .emotion-badge {
-          padding: 4px 8px;
-          font-size: 0.85em;
-          flex-shrink: 0; 
-        }
-        .review-text {
-          font-size: 1.05em;
-          flex-shrink: 0;  
-          max-width: 100%; 
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-
-        /* 모바일용 시상대 크기 자동 축소 */
+        .review-title-group { flex-direction: column; align-items: flex-start; gap: 2px; }
+        .rv-cls { font-size: 0.9em; margin: 0; }
+        .rv-title-stars { display: flex; align-items: center; width: 100%; gap: 6px; }
+        .rv-title { font-size: 1.15em; font-weight: 900; color: #0f172a; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 0 1 auto; min-width: 0; }
+        .rv-stars { flex-shrink: 0; font-size: 0.9em; margin: 0; }
+        .review-content { display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 8px; width: 100%; }
+        .emotion-badge { padding: 4px 8px; font-size: 0.85em; flex-shrink: 0; }
+        .review-text { font-size: 1.05em; flex-shrink: 0; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .podium-container { gap: 5px; height: 180px; margin-top: 25px; }
         .podium-step { width: 32%; }
         .step-1 { height: 140px; }
@@ -227,16 +152,13 @@
         .podium-score { font-size: 1.4em; margin-bottom: 6px; }
         .podium-medal { font-size: 2em; top: -30px; }
         .podium-class { font-size: 0.95em; padding: 3px 6px; }
-
         .footer-qr-bar { flex-direction: column; text-align: center; gap: 10px; padding: 15px; }
         .qr-code-img { width: 100px; height: 100px; }
-
-        /* ⭐️ 모바일 전용: QR 서브 텍스트 한 줄로 고정 (선생님 요청사항) */
-        .qr-sub { 
-          font-size: 3.6vw;
-          white-space: nowrap;
-          letter-spacing: -0.5px;
-        }
+        .qr-sub { font-size: 3.6vw; white-space: nowrap; letter-spacing: -0.5px; }
+        
+        /* 모바일에서는 플로팅 버튼 크기 조절 */
+        .fab-btn { font-size: 1.1em; padding: 10px 15px; }
+        .floating-menu { bottom: 15px; right: 15px; }
       }
     </style>
   </head>
@@ -265,17 +187,50 @@
     <div class="footer-qr-bar">
       <div class="qr-info">
         <span class="qr-title">📲 나도 독서 감상평 남기기!</span>
-        <!-- ⭐️ 요청하신 대로 문구를 나누었습니다 -->
         <span class="qr-sub">스마트폰 카메라로 QR 코드를 찍어서 등록해 보세요 📖</span>
       </div>
       <img class="qr-code-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://forms.gle/ZoRuuhFEaApeBNFo6" alt="독서 감상평 구글 폼 QR코드">
     </div>
 
-    <!-- ⭐️ 가장 하단에 추가된 저작권 문구 -->
     <div class="copyright">© 2026. FWANG all rights reserved.</div>
 
+    <!-- ⭐️ 1. 플로팅 메뉴 버튼 ⭐️ -->
+    <div class="floating-menu">
+      <a href="https://forms.gle/ZoRuuhFEaApeBNFo6" target="_blank" class="fab-btn btn-form">
+        ✏️ 감상평 남기기
+      </a>
+      <button class="fab-btn btn-install" onclick="document.getElementById('installModal').style.display='flex'">
+        📱 앱 설치하기
+      </button>
+    </div>
+
+    <!-- ⭐️ 2. 앱 설치 안내 모달(팝업) ⭐️ -->
+    <div id="installModal" class="modal-overlay">
+      <div class="modal-content">
+        <h3 class="modal-title">스마트폰에 설치하기 ✨</h3>
+        <p style="color: #64748b; margin-top: -10px; margin-bottom: 20px; font-size: 0.95em;">
+          바탕화면에 앱처럼 설치해두면 언제든<br>친구들의 감상평과 순위를 볼 수 있어요!
+        </p>
+        
+        <div class="os-guide">
+          <div class="os-title">🍎 아이폰 (Safari 브라우저)</div>
+          <div class="os-desc">
+            화면 아래쪽의 <b>[공유하기 ⍐]</b> 버튼을 누른 후,<br>메뉴에서 <b>[홈 화면에 추가 ➕]</b>를 선택하세요!
+          </div>
+        </div>
+
+        <div class="os-guide android">
+          <div class="os-title">🤖 안드로이드 (Chrome 브라우저)</div>
+          <div class="os-desc">
+            화면 오른쪽 위 <b>[메뉴 ⁝]</b> 버튼을 누른 후,<br>메뉴에서 <b>[홈 화면에 추가]</b>를 선택하세요!
+          </div>
+        </div>
+
+        <button class="close-btn" onclick="document.getElementById('installModal').style.display='none'">닫기</button>
+      </div>
+    </div>
+
     <script>
-      // ⭐️ 데이터 연동을 위한 fetch 방식 원상복구! ⭐️
       const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQMPrsDFuybbp1PJ4Yh3LrF8KtvNcM3E_Q8DSIHfkSrDnEt9QJCaR_nWW5uD33PxnrIQ/exec";
       
       let lastReviewsDataString = "";
@@ -285,7 +240,6 @@
       document.getElementById('podium-title').innerText = `🏆 재미로 보는 ${currentMonth}월 독서 챔피언 학급`;
 
       function updateDashboard() {
-        // 이 fetch 함수가 데이터를 정상적으로 가져오는 핵심 역할입니다.
         fetch(GOOGLE_APP_SCRIPT_URL)
           .then(response => response.json())
           .then(data => drawDashboard(data))
@@ -293,7 +247,6 @@
       }
 
       function drawDashboard(data) {
-        // 공지사항 처리
         const noticeBar = document.getElementById('notice-bar');
         const noticeText = document.getElementById('notice-text');
         if (data.notice && data.notice.trim() !== "") {
@@ -303,7 +256,6 @@
           noticeBar.style.display = "none";
         }
 
-        // 리뷰 처리
         const currentReviewsString = JSON.stringify(data.recentReviews);
         if (lastReviewsDataString !== currentReviewsString) {
           let reviewHtml = "";
@@ -332,7 +284,6 @@
           lastReviewsDataString = currentReviewsString;
         }
 
-        // ⭐️ 시상대: 상위 3개 데이터를 각각 독립된 단상에 하나씩 올리는 로직 ⭐️
         const stats = data.classStats;
         const podiumDiv = document.getElementById('podium');
         
@@ -342,49 +293,44 @@
           return;
         }
 
-        // 개별 단상을 만들어주는 함수 (공동 순위에 따라 색상/높이 자동 계산)
-        function createPodiumStep(classItem) {
-          if (!classItem) {
-             return `<div class="podium-step" style="visibility:hidden;"></div>`;
-          }
-          
-          let styleRank = classItem.rank > 3 ? 3 : classItem.rank; 
-          let colorClass = `step-${styleRank}`;
-          let medals = {1: "🥇", 2: "🥈", 3: "🥉"};
-          let medalIcon = medals[styleRank] || "🏅";
-          let scoreColor = styleRank === 1 ? 'color:#1e293b;' : ''; 
+        let rankGroups = { 1: [], 2: [], 3: [] };
+        let listHtml = ""; 
 
-          return `
-            <div class="podium-step ${colorClass}">
-              <div class="podium-medal">${medalIcon}</div>
-              <div class="podium-score" style="${scoreColor}">${classItem.count}<span>권</span></div>
-              <div class="podium-classes">
-                <div class="podium-class">${classItem.className}</div>
-              </div>
-            </div>`;
-        }
-
-        // 전체 1, 2, 3번째 반을 뽑아와서 시상대 왼-중-오 위치에 할당
-        let centerItem = stats[0] || null; // 1번째 (예: 1위)
-        let leftItem = stats[1] || null;   // 2번째 (예: 공동 1위 or 2위)
-        let rightItem = stats[2] || null;  // 3번째 
-
-        podiumDiv.innerHTML = createPodiumStep(leftItem) + 
-                              createPodiumStep(centerItem) + 
-                              createPodiumStep(rightItem);
-
-        // 시상대에 올라간 상위 3개를 제외한 나머지 반들은 아래 리스트에 깔끔하게 출력
-        const restStats = stats.slice(3);
-        const currentRanksString = JSON.stringify(restStats);
-        if (lastRanksDataString !== currentRanksString) {
-          let listHtml = ""; 
-          restStats.forEach(s => {
+        stats.forEach(s => {
+          if (s.rank <= 3) {
+            rankGroups[s.rank].push(s);
+          } else {
             listHtml += `
               <li class="rank-item">
                 <span class="class-name">${s.rank}위 &nbsp;&nbsp; ${s.className}</span> 
                 <span class="score">${s.count}권</span>
               </li>`;
-          });
+          }
+        });
+
+        function createPodiumStep(rankNumber, colorClass, medalIcon) {
+          let classes = rankGroups[rankNumber];
+          if (classes.length === 0) {
+             return `<div class="podium-step ${colorClass}" style="visibility:hidden;"></div>`;
+          }
+          let score = classes[0].count; 
+          let classNamesHtml = classes.map(c => `<div class="podium-class">${c.className}</div>`).join("");
+          let scoreColor = rankNumber === 1 ? 'color:#1e293b;' : ''; 
+
+          return `
+            <div class="podium-step ${colorClass}">
+              <div class="podium-medal">${medalIcon}</div>
+              <div class="podium-score" style="${scoreColor}">${score}<span>권</span></div>
+              <div class="podium-classes">${classNamesHtml}</div>
+            </div>`;
+        }
+
+        podiumDiv.innerHTML = createPodiumStep(2, "step-2", "🥈") + 
+                              createPodiumStep(1, "step-1", "🥇") + 
+                              createPodiumStep(3, "step-3", "🥉");
+
+        const currentRanksString = JSON.stringify(stats.filter(s => s.rank > 3));
+        if (lastRanksDataString !== currentRanksString) {
           document.getElementById('ranking-list').innerHTML = listHtml;
           lastRanksDataString = currentRanksString;
         }
