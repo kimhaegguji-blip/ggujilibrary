@@ -3,70 +3,24 @@
   <head>
     <base target="_top">
     <meta charset="UTF-8">
-    <!-- ⭐️ 스마트폰 화면 비율 유지 및 앱처럼 보이게 하는 설정 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <!-- 모바일 기기 홈 화면 추가(앱 아이콘) 설정 -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="독서현황판">
-    <!-- 책 모양 아이콘 적용 -->
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2232/2232688.png"> 
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/2232/2232688.png">
-
-    <!-- 둥글고 귀여운 Jua 폰트와 깔끔한 Noto Sans 폰트 적용 -->
     <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
-      body { 
-        font-family: 'Noto Sans KR', sans-serif; 
-        background-color: #f0fdf4; 
-        margin: 0; 
-        padding: 20px; 
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        box-sizing: border-box;
-      }
-      .header { 
-        text-align: center; 
-        background: linear-gradient(90deg, #4ade80, #3b82f6);
-        color: white; 
-        padding: 12px; 
-        border-radius: 20px; 
-        margin-bottom: 10px; 
-        font-family: 'Jua', sans-serif;
-        font-size: 2.8em; 
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      }
+      body { font-family: 'Noto Sans KR', sans-serif; background-color: #f0fdf4; margin: 0; padding: 20px; display: flex; flex-direction: column; height: 100vh; box-sizing: border-box; }
+      .header { text-align: center; background: linear-gradient(90deg, #4ade80, #3b82f6); color: white; padding: 12px; border-radius: 20px; margin-bottom: 10px; font-family: 'Jua', sans-serif; font-size: 2.8em; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
       
-      .notice-bar {
-        background-color: #ffe4e6;
-        color: #e11d48;
-        padding: 10px;
-        border-radius: 12px;
-        margin-bottom: 15px;
-        font-weight: bold;
-        font-size: 1.2em;
-        display: none; 
-        overflow: hidden;
-        white-space: nowrap;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        border: 2px solid #fda4af;
-      }
-      .marquee {
-        display: inline-block;
-        padding-left: 100%;
-        animation: marquee 20s linear infinite;
-      }
-      @keyframes marquee {
-        0% { transform: translate(0, 0); }
-        100% { transform: translate(-100%, 0); }
-      }
+      .notice-bar { background-color: #ffe4e6; color: #e11d48; padding: 10px; border-radius: 12px; margin-bottom: 15px; font-weight: bold; font-size: 1.2em; display: none; overflow: hidden; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border: 2px solid #fda4af; }
+      .marquee { display: inline-block; padding-left: 100%; animation: marquee 20s linear infinite; }
+      @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
       .container { display: flex; gap: 20px; flex: 1; overflow: hidden; }
       .panel { background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
-      
       .review-panel { flex: 1; overflow: hidden; }
       .rank-panel { flex: 1; overflow: hidden; }
 
@@ -74,15 +28,13 @@
       
       .review-list-container { flex: 1; overflow: hidden; position: relative; padding-top: 5px; }
       .review-card { background: #f8fafc; padding: 15px; margin-bottom: 12px; border-radius: 12px; border-left: 5px solid #3b82f6; will-change: margin-top; width: 100%; box-sizing: border-box; }
-      
       .review-title-group { display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 8px; gap: 4px; }
       .rv-cls { color: #64748b; font-weight: bold; font-size: 1.1em; }
       .rv-title-stars { display: flex; align-items: center; gap: 4px; }
       .rv-title { font-weight: bold; color: #0f172a; font-size: 1.2em; }
       .rv-stars { font-size: 1em; }
-      
       .review-content { display: flex; align-items: flex-start; gap: 8px; }
-      .emotion-badge { background-color: #bfdbfe; color: #1e3a8a; padding: 4px 10px; border-radius: 20px; font-size: 0.9em; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.05); flex-shrink: 0; }
+      .emotion-badge { background-color: #bfdbfe; color: #1e3a8a; padding: 4px 10px; border-radius: 20px; font-size: 0.9em; font-weight: bold; flex-shrink: 0; }
       .review-text { color: #334155; font-size: 1.1em; line-height: 1.4; word-break: break-all; }
       
       .podium-container { display: flex; align-items: flex-end; justify-content: center; gap: 15px; height: 260px; margin-bottom: 15px; margin-top: 15px; }
@@ -91,11 +43,29 @@
       .podium-score { font-family: 'Noto Sans KR', sans-serif; font-size: 2.6em; font-weight: 900; color: #0f172a; margin-bottom: 12px; letter-spacing: -1px; line-height: 1; }
       .podium-score span { font-size: 0.55em; font-weight: 700; color: #475569; margin-left: 2px; }
       .podium-classes { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 8px; width: 100%; padding: 0 10px; box-sizing: border-box; }
-      .podium-class { font-family: 'Jua', sans-serif; font-size: 1.15em; color: #1e293b; background-color: rgba(255, 255, 255, 0.65); padding: 5px 12px; border-radius: 20px; word-break: keep-all; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+      .podium-class { font-family: 'Jua', sans-serif; font-size: 1.15em; color: #1e293b; background-color: rgba(255, 255, 255, 0.65); padding: 5px 12px; border-radius: 20px; word-break: keep-all; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 5px; }
       
       .step-1 { height: 210px; background-color: #fde047; box-shadow: 0 -10px 20px rgba(250, 204, 21, 0.4); z-index: 10; width: 180px;}
       .step-2 { height: 150px; background-color: #e2e8f0; }
       .step-3 { height: 110px; background-color: #fed7aa; }
+
+      /* ⭐️ 명예의 전당 버튼 스타일 */
+      .hof-btn { 
+        display: block; 
+        margin: 5px auto 10px auto; 
+        background: linear-gradient(135deg, #f59e0b, #d97706); 
+        color: white; 
+        font-family: 'Jua', sans-serif; 
+        font-size: 1.25em; 
+        padding: 8px 25px; 
+        border-radius: 25px; 
+        border: none; 
+        cursor: pointer; 
+        box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3); 
+        transition: transform 0.2s; 
+      }
+      .hof-btn:hover { transform: scale(1.05); }
+      .hof-btn:active { transform: scale(0.95); }
 
       .rank-list-container { flex: 1; overflow: hidden; background: #f1f5f9; border-radius: 15px; padding: 12px; }
       .rank-list { list-style: none; padding: 0; margin: 0; }
@@ -109,59 +79,36 @@
       .qr-sub { font-size: 1.05em; color: #475569; font-weight: 500; }
       .qr-code-img { width: 75px; height: 75px; border-radius: 8px; border: 1px solid #cbd5e1; padding: 3px; background: white; flex-shrink: 0; }
       
-      /* PC 전용 버튼 디자인 */
       .desktop-action-btns { display: flex; gap: 12px; margin-left: auto; margin-right: 25px; }
       .action-btn { display: flex; align-items: center; justify-content: center; padding: 10px 18px; border-radius: 25px; font-family: 'Jua', sans-serif; font-size: 1.2em; color: white; border: none; cursor: pointer; text-decoration: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s; white-space: nowrap; }
       .action-btn:active { transform: scale(0.95); }
       
-      /* 공통 버튼 컬러 (PC, 모바일 공유) */
       .btn-share { background: linear-gradient(135deg, #a855f7, #9333ea); }
       .btn-form { background: linear-gradient(135deg, #3b82f6, #2563eb); }
       .btn-install { background: linear-gradient(135deg, #10b981, #059669); }
 
-      /* 모바일 전용 메뉴바 (PC에서는 안보임) */
       .floating-menu { display: none; }
-
       .copyright { text-align: center; font-size: 0.8em; color: #94a3b8; margin-top: 15px; margin-bottom: 5px; font-family: 'Noto Sans KR', sans-serif; }
 
       .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px; box-sizing: border-box; backdrop-filter: blur(3px); }
       .modal-content { background: white; padding: 30px; border-radius: 20px; width: 100%; max-width: 400px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.2); text-align: center; }
       .modal-title { font-family: 'Jua', sans-serif; font-size: 1.8em; color: #1e293b; margin-top: 0; margin-bottom: 15px; }
       .os-guide { background: #f8fafc; border-radius: 12px; padding: 15px; margin-bottom: 12px; text-align: left; border-left: 5px solid #3b82f6; }
-      .os-guide.android { border-left-color: #10b981; }
-      .os-guide.pc { border-left-color: #f59e0b; }
       .os-title { font-weight: 900; font-size: 1.1em; color: #334155; margin-bottom: 5px; }
       .os-desc { color: #475569; font-size: 0.95em; line-height: 1.4; word-break: keep-all; }
       .close-btn { background: #e2e8f0; color: #475569; border: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; font-size: 1.1em; cursor: pointer; width: 100%; margin-top: 10px; transition: background 0.2s; }
-      .close-btn:hover { background: #cbd5e1; }
+      
+      /* ⭐️ 명예의 전당 전용 CSS */
+      .hof-month-section { background: #f8fafc; border-radius: 15px; padding: 15px; margin-bottom: 15px; border: 2px solid #e2e8f0; text-align: left; }
+      .hof-month-title { font-family: 'Jua', sans-serif; color: #0f172a; font-size: 1.4em; margin: 0 0 10px 0; border-bottom: 2px dashed #cbd5e1; padding-bottom: 5px; }
+      .hof-list { list-style: none; padding: 0; margin: 0; }
+      .hof-list li { font-size: 1.15em; font-weight: bold; color: #334155; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+      .hof-list li span.hof-cnt { color: #059669; font-size: 0.9em; background: #d1fae5; padding: 2px 8px; border-radius: 10px; }
 
-      .toast-message {
-        position: fixed;
-        bottom: 50%;
-        left: 50%;
-        transform: translate(-50%, 50%);
-        background: rgba(30, 41, 59, 0.95);
-        color: #4ade80;
-        padding: 15px 30px;
-        border-radius: 30px;
-        font-family: 'Jua', sans-serif;
-        font-size: 1.3em;
-        white-space: nowrap;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s, transform 0.3s;
-        z-index: 2000;
-        pointer-events: none;
-      }
-      .toast-message.show {
-        opacity: 1;
-        visibility: visible;
-        transform: translate(-50%, 0);
-      }
+      .toast-message { position: fixed; bottom: 50%; left: 50%; transform: translate(-50%, 50%); background: rgba(30, 41, 59, 0.95); color: #4ade80; padding: 15px 30px; border-radius: 30px; font-family: 'Jua', sans-serif; font-size: 1.3em; white-space: nowrap; box-shadow: 0 10px 30px rgba(0,0,0,0.3); opacity: 0; visibility: hidden; transition: opacity 0.3s, transform 0.3s; z-index: 2000; pointer-events: none; }
+      .toast-message.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
 
       @media screen and (max-width: 768px) {
-        /* 하단 탭 바 높이만큼 padding-bottom 추가하여 가려짐 방지 */
         body { height: auto; min-height: 100vh; overflow-y: auto; padding: 10px; padding-bottom: 70px; }
         .header { font-size: 6.5vw; padding: 12px 10px; white-space: nowrap; letter-spacing: -1px; }
         .container { flex-direction: column; gap: 15px; height: auto; overflow: visible; }
@@ -170,13 +117,11 @@
         .rank-list-container { height: max(100px, 12vh); flex: none; }
         .panel-title { font-size: 5.4vw; white-space: nowrap; letter-spacing: -0.5px; }
         .review-card { padding: 12px; }
-        
         .review-title-group { flex-direction: column; align-items: flex-start; gap: 2px; }
         .rv-cls { font-size: 0.9em; margin: 0; }
         .rv-title-stars { display: flex; align-items: center; width: 100%; gap: 6px; }
         .rv-title { font-size: 1.15em; font-weight: 900; color: #0f172a; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 0 1 auto; min-width: 0; }
         .rv-stars { flex-shrink: 0; font-size: 0.9em; margin: 0; }
-        
         .review-content { display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 8px; width: 100%; }
         .emotion-badge { padding: 4px 8px; font-size: 0.85em; flex-shrink: 0; }
         .review-text { font-size: 1.05em; flex-shrink: 0; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -190,57 +135,24 @@
         .podium-medal { font-size: 2em; top: -30px; }
         .podium-class { font-size: 0.95em; padding: 3px 6px; }
         
+        /* 모바일 명예의 전당 버튼 크기 조절 */
+        .hof-btn { font-size: 1.1em; padding: 6px 15px; margin-bottom: 15px; }
+
         .desktop-action-btns { display: none; }
         .footer-qr-bar { flex-direction: column; text-align: center; gap: 10px; padding: 15px; }
         .qr-code-img { width: 100px; height: 100px; }
         .qr-sub { font-size: 3.6vw; white-space: nowrap; letter-spacing: -0.5px; }
         
-        /* ⭐️ 모바일 하단 3등분 탭 바 스타일 */
-        .floating-menu { 
-          position: fixed; 
-          bottom: 0; 
-          left: 0; 
-          width: 100%; 
-          display: flex; 
-          flex-direction: row; 
-          z-index: 1000; 
-          box-shadow: 0 -4px 15px rgba(0,0,0,0.15); 
-          background: white; /* iOS 하단 여백 색상 맞춤 */
-          padding-bottom: env(safe-area-inset-bottom);
-        }
-        .fab-btn { 
-          flex: 1; /* 3개가 동일한 너비 차지 */
-          display: flex; 
-          align-items: center; 
-          justify-content: center; 
-          padding: 16px 2px; 
-          border-radius: 0; /* 각진 사각형 */
-          font-family: 'Jua', sans-serif; 
-          font-size: min(3.8vw, 1.1em); /* 폰 화면에 딱 맞게 자동 조절 */
-          color: white; 
-          border: none; 
-          box-shadow: none; 
-          cursor: pointer; 
-          text-decoration: none; 
-          border-right: 1px solid rgba(255,255,255,0.3); /* 버튼 사이 구분선 */
-          white-space: nowrap;
-          letter-spacing: -0.5px;
-        }
-        .fab-btn:last-child {
-          border-right: none;
-        }
-        .fab-btn:active { 
-          filter: brightness(0.9); /* 누를 때 살짝 어두워지는 터치 효과 */
-        }
+        .floating-menu { position: fixed; bottom: 0; left: 0; width: 100%; display: flex; flex-direction: row; z-index: 1000; box-shadow: 0 -4px 15px rgba(0,0,0,0.15); background: white; padding-bottom: env(safe-area-inset-bottom); }
+        .fab-btn { flex: 1; display: flex; align-items: center; justify-content: center; padding: 16px 2px; font-family: 'Jua', sans-serif; font-size: min(3.8vw, 1.1em); color: white; border: none; cursor: pointer; text-decoration: none; border-right: 1px solid rgba(255,255,255,0.3); white-space: nowrap; letter-spacing: -0.5px; }
+        .fab-btn:last-child { border-right: none; }
       }
     </style>
   </head>
   <body>
     <div class="header">📚 독서 마라톤 챔피언 현황판 🚀</div>
     
-    <div class="notice-bar" id="notice-bar">
-      <span class="marquee" id="notice-text"></span>
-    </div>
+    <div class="notice-bar" id="notice-bar"><span class="marquee" id="notice-text"></span></div>
 
     <div class="container">
       <div class="panel review-panel">
@@ -249,8 +161,13 @@
       </div>
 
       <div class="panel rank-panel">
-        <h2 class="panel-title" id="podium-title">🏆 재미로 보는 이번 달 독서 챔피언 학급</h2>
+        <h2 class="panel-title" id="podium-title">🏆 재미로 보는 이번 달 독서 챔피언</h2>
+        
         <div class="podium-container" id="podium"></div>
+        
+        <!-- ⭐️ 추가된 명예의 전당 버튼 -->
+        <button class="hof-btn" onclick="document.getElementById('hofModal').style.display='flex'">👑 명예의 전당 (역대 우승 학급)</button>
+
         <div class="rank-list-container">
           <ul id="ranking-list" class="rank-list"></ul>
         </div>
@@ -262,20 +179,16 @@
         <span class="qr-title">📲 나도 독서 감상평 남기기!</span>
         <span class="qr-sub">스마트폰 카메라로 QR 코드를 찍어서 등록해 보세요 📖</span>
       </div>
-      
-      <!-- PC 환경에서만 보이는 하단 버튼 -->
       <div class="desktop-action-btns">
-        <button class="action-btn btn-share" onclick="shareApp()">🔗 링크 공유</button>
+        <button class="action-btn btn-share" onclick="shareApp()">🔗 링크 복사</button>
         <a href="https://forms.gle/ZoRuuhFEaApeBNFo6" target="_blank" class="action-btn btn-form">✏️ 감상평 남기기</a>
         <button class="action-btn btn-install" onclick="document.getElementById('installModal').style.display='flex'">💻 바탕화면에 설치</button>
       </div>
-
       <img class="qr-code-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://forms.gle/ZoRuuhFEaApeBNFo6" alt="독서 감상평 구글 폼 QR코드">
     </div>
 
     <div class="copyright">© 2026. FWANG all rights reserved.</div>
 
-    <!-- 모바일 환경에서만 보이는 3등분 탭 바 -->
     <div class="floating-menu">
       <button class="fab-btn btn-share" onclick="shareApp()">🔗 공유하기</button>
       <a href="https://forms.gle/ZoRuuhFEaApeBNFo6" target="_blank" class="fab-btn btn-form">✏️ 감상평 쓰기</a>
@@ -284,58 +197,52 @@
 
     <div id="custom-toast" class="toast-message">✨ 현황판 링크가 복사되었습니다! ✨</div>
 
+    <!-- ⭐️ 명예의 전당 모달 팝업 -->
+    <div id="hofModal" class="modal-overlay">
+      <div class="modal-content" style="max-width: 450px;">
+        <h3 class="modal-title" style="color: #d97706;">👑 역대 챔피언 명예의 전당</h3>
+        <p style="color: #64748b; margin-top: -10px; margin-bottom: 20px; font-size: 0.95em;">
+          지난달에 가장 책을 많이 읽은 학급들입니다! 👏
+        </p>
+        
+        <div id="hof-content">데이터를 분석하는 중...</div>
+
+        <button class="close-btn" onclick="document.getElementById('hofModal').style.display='none'">닫기</button>
+      </div>
+    </div>
+
     <div id="installModal" class="modal-overlay">
       <div class="modal-content">
         <h3 class="modal-title">바탕화면에 바로가기 설치 ✨</h3>
-        <p style="color: #64748b; margin-top: -10px; margin-bottom: 20px; font-size: 0.95em;">
-          바탕화면(홈 화면)에 앱처럼 설치해두면 언제든<br>친구들의 감상평과 순위를 볼 수 있어요!
-        </p>
-        
-        <div class="os-guide pc">
-          <div class="os-title">💻 PC (크롬, 엣지, 웨일 등)</div>
-          <div class="os-desc">
-            주소창 오른쪽 끝 <b>[앱 설치 ⬇️]</b> 아이콘을 누르거나,<br>메뉴(⁝)에서 <b>[도구 더보기] → [바로가기 만들기]</b>를 선택!
-          </div>
+        <div class="os-guide" style="border-left-color: #f59e0b;">
+          <div class="os-title">💻 PC (크롬, 엣지 등)</div>
+          <div class="os-desc">주소창 오른쪽 끝 <b>[앱 설치 ⬇️]</b> 아이콘을 누르거나, 메뉴(⁝)에서 <b>[바로가기 만들기]</b>를 선택!</div>
         </div>
-
-        <div class="os-guide">
+        <div class="os-guide" style="border-left-color: #3b82f6;">
           <div class="os-title">🍎 아이폰 (Safari 브라우저)</div>
-          <div class="os-desc">
-            화면 아래쪽 <b>[공유하기 ⍐]</b> 버튼을 누른 후,<br>메뉴에서 <b>[홈 화면에 추가 ➕]</b>를 선택하세요!
-          </div>
+          <div class="os-desc">화면 아래쪽 <b>[공유하기 ⍐]</b> 버튼을 누른 후, 메뉴에서 <b>[홈 화면에 추가 ➕]</b>를 선택하세요!</div>
         </div>
-
-        <div class="os-guide android">
+        <div class="os-guide" style="border-left-color: #10b981;">
           <div class="os-title">🤖 안드로이드 (Chrome 브라우저)</div>
-          <div class="os-desc">
-            화면 오른쪽 위 <b>[메뉴 ⁝]</b> 버튼을 누른 후,<br>메뉴에서 <b>[홈 화면에 추가]</b>를 선택하세요!
-          </div>
+          <div class="os-desc">화면 오른쪽 위 <b>[메뉴 ⁝]</b> 버튼을 누른 후, 메뉴에서 <b>[홈 화면에 추가]</b>를 선택하세요!</div>
         </div>
-
         <button class="close-btn" onclick="document.getElementById('installModal').style.display='none'">닫기</button>
       </div>
     </div>
 
     <script>
       const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQMPrsDFuybbp1PJ4Yh3LrF8KtvNcM3E_Q8DSIHfkSrDnEt9QJCaR_nWW5uD33PxnrIQ/exec";
-      
       let lastReviewsDataString = "";
       let lastRanksDataString = "";
+      let lastHofDataString = "";
 
       const currentMonth = new Date().getMonth() + 1;
-      document.getElementById('podium-title').innerText = `🏆 재미로 보는 ${currentMonth}월 독서 챔피언 학급`;
+      document.getElementById('podium-title').innerText = `🏆 재미로 보는 ${currentMonth}월 독서 챔피언`;
 
       function shareApp() {
         const shareUrl = "https://kimhaegguji-blip.github.io/ggujilibrary/";
-        const shareTitle = "독서 마라톤 챔피언 현황판";
-        const shareText = "우리 학교 독서 마라톤 현황판을 확인하고 감상평을 남겨보세요!";
-
-        if (navigator.share) {
-          navigator.share({
-            title: shareTitle,
-            text: shareText,
-            url: shareUrl
-          }).catch((error) => console.log('공유 실패 또는 취소:', error));
+        if (navigator.share && /Mobi|Android/i.test(navigator.userAgent)) {
+          navigator.share({ title: "독서 마라톤 챔피언 현황판", text: "우리 학교 독서 마라톤 현황판 확인하기!", url: shareUrl }).catch(err => console.log('공유 취소:', err));
         } else {
           const textArea = document.createElement("textarea");
           textArea.value = shareUrl;
@@ -345,143 +252,95 @@
             document.execCommand('copy');
             const toast = document.getElementById('custom-toast');
             toast.classList.add('show');
-            setTimeout(() => {
-              toast.classList.remove('show');
-            }, 2500); 
-          } catch (err) {
-            console.error('클립보드 복사 실패', err);
-          }
+            setTimeout(() => toast.classList.remove('show'), 2500); 
+          } catch (err) { console.error('복사 실패', err); }
           document.body.removeChild(textArea);
         }
       }
 
       function updateDashboard() {
         fetch(GOOGLE_APP_SCRIPT_URL)
-          .then(response => response.json())
+          .then(res => res.json())
           .then(data => drawDashboard(data))
-          .catch(error => console.error("데이터를 불러오는데 실패했습니다.", error));
+          .catch(err => console.error("데이터 로드 실패", err));
       }
 
       function drawDashboard(data) {
-        const noticeBar = document.getElementById('notice-bar');
-        const noticeText = document.getElementById('notice-text');
         if (data.notice && data.notice.trim() !== "") {
-          noticeText.innerText = data.notice;
-          noticeBar.style.display = "block";
-        } else {
-          noticeBar.style.display = "none";
-        }
+          document.getElementById('notice-text').innerText = data.notice;
+          document.getElementById('notice-bar').style.display = "block";
+        } else { document.getElementById('notice-bar').style.display = "none"; }
 
         const currentReviewsString = JSON.stringify(data.recentReviews);
         if (lastReviewsDataString !== currentReviewsString) {
-          let reviewHtml = "";
-          if(data.recentReviews.length === 0) {
-            reviewHtml = "<p style='text-align:center; color:#94a3b8; font-size:1.2em; padding-top:20px;'>이번 달은 아직 등록된 감상평이 없어요!</p>";
-          } else {
-            data.recentReviews.forEach(r => {
-              let emotionHtml = r.emotion ? `<span class="emotion-badge">${r.emotion}</span>` : "";
-              
-              reviewHtml += `<div class="review-card">
-                <div class="review-title-group">
-                  <span class="rv-cls">[${r.cls}]</span>
-                  <div class="rv-title-stars">
-                    <span class="rv-title">${r.title}</span>
-                    <span class="rv-stars">${r.stars}</span>
-                  </div>
-                </div>
-                <div class="review-content">
-                  ${emotionHtml}
-                  <span class="review-text">${r.review}</span>
-                </div>
-              </div>`;
-            });
-          }
+          let reviewHtml = data.recentReviews.length === 0 ? "<p style='text-align:center; color:#94a3b8; font-size:1.2em; padding-top:20px;'>이번 달은 아직 등록된 감상평이 없어요!</p>" : "";
+          data.recentReviews.forEach(r => {
+            let emotionHtml = r.emotion ? `<span class="emotion-badge">${r.emotion}</span>` : "";
+            reviewHtml += `<div class="review-card"><div class="review-title-group"><span class="rv-cls">[${r.cls}]</span><div class="rv-title-stars"><span class="rv-title">${r.title}</span><span class="rv-stars">${r.stars}</span></div></div><div class="review-content">${emotionHtml}<span class="review-text">${r.review}</span></div></div>`;
+          });
           document.getElementById('reviews').innerHTML = reviewHtml;
           lastReviewsDataString = currentReviewsString;
         }
 
         const stats = data.classStats;
         const podiumDiv = document.getElementById('podium');
-        
         if(!stats || stats.length === 0) {
           podiumDiv.innerHTML = "<p style='text-align:center; color:#94a3b8; font-size:1.2em; width:100%;'>독서를 시작해 보세요!</p>";
           document.getElementById('ranking-list').innerHTML = "";
-          return;
-        }
-
-        let rankGroups = { 1: [], 2: [], 3: [] };
-        let listHtml = ""; 
-
-        stats.forEach(s => {
-          if (s.rank <= 3) {
-            rankGroups[s.rank].push(s);
-          } else {
-            listHtml += `
-              <li class="rank-item">
-                <span class="class-name">${s.rank}위 &nbsp;&nbsp; ${s.className}</span> 
-                <span class="score">${s.count}권</span>
-              </li>`;
-          }
-        });
-
-        let top3Classes = [];
-        for (let r = 1; r <= 3; r++) {
-          rankGroups[r].forEach(cls => {
-            top3Classes.push({ rank: r, data: cls });
-          });
-        }
-        top3Classes = top3Classes.slice(0, 3); 
-
-        if (top3Classes.length === 0) {
-           podiumDiv.innerHTML = "";
         } else {
-          let podiumOrder = [];
-          if (top3Classes.length === 1) podiumOrder = [null, top3Classes[0], null];
-          if (top3Classes.length === 2) podiumOrder = [top3Classes[1], top3Classes[0], null];
-          if (top3Classes.length === 3) podiumOrder = [top3Classes[1], top3Classes[0], top3Classes[2]];
-
-          let podiumHtml = "";
-          podiumOrder.forEach(item => {
-            if (!item) {
-              podiumHtml += `<div class="podium-step" style="visibility:hidden; width:150px;"></div>`;
-              return;
-            }
-            
-            let colorClass = "step-" + item.rank;
-            let medalIcon = item.rank === 1 ? "🥇" : (item.rank === 2 ? "🥈" : "🥉");
-            let scoreColor = item.rank === 1 ? 'color:#1e293b;' : ''; 
-            
-            podiumHtml += `
-              <div class="podium-step ${colorClass}">
-                <div class="podium-medal">${medalIcon}</div>
-                <div class="podium-score" style="${scoreColor}">${item.data.count}<span>권</span></div>
-                <div class="podium-classes">
-                  <div class="podium-class">${item.data.className}</div>
-                </div>
-              </div>`;
+          let rankGroups = { 1: [], 2: [], 3: [] };
+          let listHtml = ""; 
+          stats.forEach(s => {
+            if (s.rank <= 3) rankGroups[s.rank].push(s);
+            else listHtml += `<li class="rank-item"><span class="class-name">${s.rank}위 &nbsp;&nbsp; ${s.className}</span> <span class="score">${s.count}권</span></li>`;
           });
-          podiumDiv.innerHTML = podiumHtml;
+
+          function createPodiumStep(rNum, cClass, icon) {
+            if (rankGroups[rNum].length === 0) return `<div class="podium-step ${cClass}" style="visibility:hidden;"></div>`;
+            let score = rankGroups[rNum][0].count; 
+            let classNamesHtml = rankGroups[rNum].map(c => `<div class="podium-class">${c.className}</div>`).join("");
+            let scoreColor = rNum === 1 ? 'color:#1e293b;' : ''; 
+            return `<div class="podium-step ${cClass}"><div class="podium-medal">${icon}</div><div class="podium-score" style="${scoreColor}">${score}<span>권</span></div><div class="podium-classes">${classNamesHtml}</div></div>`;
+          }
+
+          podiumDiv.innerHTML = createPodiumStep(2, "step-2", "🥈") + createPodiumStep(1, "step-1", "🥇") + createPodiumStep(3, "step-3", "🥉");
+          const currentRanksString = JSON.stringify(stats.filter(s => s.rank > 3));
+          if (lastRanksDataString !== currentRanksString) {
+            document.getElementById('ranking-list').innerHTML = listHtml;
+            lastRanksDataString = currentRanksString;
+          }
         }
 
-        const currentRanksString = JSON.stringify(stats.filter(s => s.rank > 3));
-        if (lastRanksDataString !== currentRanksString) {
-          document.getElementById('ranking-list').innerHTML = listHtml;
-          lastRanksDataString = currentRanksString;
+        // ⭐️ 명예의 전당 데이터 렌더링 로직
+        const currentHofString = JSON.stringify(data.hallOfFame);
+        if (lastHofDataString !== currentHofString) {
+          const hofContainer = document.getElementById('hof-content');
+          if (!data.hallOfFame || data.hallOfFame.length === 0) {
+            hofContainer.innerHTML = "<p style='color:#94a3b8; font-size: 1.1em; padding: 20px 0;'>아직 지난 기록이 없어요!<br>이번 달 챔피언은 누가 될까요? 🚀</p>";
+          } else {
+            let hofHtml = "";
+            data.hallOfFame.forEach(monthData => {
+              hofHtml += `<div class="hof-month-section"><h4 class="hof-month-title">${monthData.month}</h4><ul class="hof-list">`;
+              monthData.topClasses.forEach(cls => {
+                let medal = cls.rank === 1 ? '🥇' : (cls.rank === 2 ? '🥈' : '🥉');
+                hofHtml += `<li>${medal} ${cls.rank}위 - ${cls.className} <span class="hof-cnt">${cls.count}권</span></li>`;
+              });
+              hofHtml += `</ul></div>`;
+            });
+            hofContainer.innerHTML = hofHtml;
+          }
+          lastHofDataString = currentHofString;
         }
       }
 
       function scrollTicker(containerId) {
         const container = document.getElementById(containerId);
         if (!container || container.children.length < 2) return;
-
         const firstChild = container.firstElementChild;
         const height = firstChild.offsetHeight;
-        const style = window.getComputedStyle(firstChild);
-        const marginBottom = parseFloat(style.marginBottom);
-
+        const marginBottom = parseFloat(window.getComputedStyle(firstChild).marginBottom);
         firstChild.style.transition = 'margin-top 0.5s ease-in-out';
         firstChild.style.marginTop = `-${height + marginBottom}px`;
-
         setTimeout(() => {
           if (firstChild.parentNode === container) {
             firstChild.style.transition = 'none';
@@ -493,7 +352,6 @@
 
       updateDashboard();
       setInterval(updateDashboard, 10000); 
-
       setInterval(() => scrollTicker('reviews'), 3000);
       setInterval(() => scrollTicker('ranking-list'), 3000);
     </script>
