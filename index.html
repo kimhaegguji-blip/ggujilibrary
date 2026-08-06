@@ -48,15 +48,18 @@
       .step-2 { height: 150px; background-color: #e2e8f0; }
       .step-3 { height: 110px; background-color: #fed7aa; }
 
-      .hof-btn { display: block; margin: 5px auto 10px auto; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; font-family: 'Jua', sans-serif; font-size: 1.25em; padding: 8px 25px; border-radius: 25px; border: none; cursor: pointer; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3); transition: transform 0.2s; }
-      .hof-btn:hover { transform: scale(1.05); }
-      .hof-btn:active { transform: scale(0.95); }
-
-      .rank-list-container { flex: 1; overflow: hidden; background: #f1f5f9; border-radius: 15px; padding: 12px; }
+      .rank-list-container { flex: 1; overflow: hidden; background: #f1f5f9; border-radius: 15px; padding: 12px; margin-bottom: 10px; }
       .rank-list { list-style: none; padding: 0; margin: 0; }
       .rank-item { font-size: 1.2em; padding: 10px 15px; border-bottom: 1px solid #cbd5e1; display: flex; justify-content: space-between; background: white; margin-bottom: 6px; border-radius: 8px; font-weight: bold; will-change: margin-top; }
       .rank-item span.class-name { color: #334155; }
       .rank-item span.score { color: #059669; }
+
+      .hof-btn-wrapper { text-align: center; margin-top: 5px; margin-bottom: 10px; }
+      .hof-hint { font-family: 'Noto Sans KR', sans-serif; font-size: 0.95em; color: #475569; margin-bottom: 8px; font-weight: 700; animation: bounce 2s infinite; }
+      @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+      .hof-btn { display: inline-block; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; font-family: 'Jua', sans-serif; font-size: 1.25em; padding: 8px 25px; border-radius: 25px; border: none; cursor: pointer; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3); transition: transform 0.2s; }
+      .hof-btn:hover { transform: scale(1.05); }
+      .hof-btn:active { transform: scale(0.95); }
 
       .footer-qr-bar { margin-top: 15px; background: white; padding: 10px 25px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; border: 3px dashed #4ade80; }
       .qr-info { display: flex; flex-direction: column; gap: 4px; }
@@ -79,13 +82,12 @@
       .os-title { font-weight: 900; font-size: 1.1em; color: #334155; margin-bottom: 5px; }
       .os-desc { color: #475569; font-size: 0.95em; line-height: 1.4; word-break: keep-all; }
       
-      .hof-month-section { background: #f8fafc; border-radius: 15px; padding: 15px; margin-bottom: 15px; border: 2px solid #e2e8f0; text-align: left; }
-      .hof-month-title { font-family: 'Jua', sans-serif; color: #0f172a; font-size: 1.4em; margin: 0 0 10px 0; border-bottom: 2px dashed #cbd5e1; padding-bottom: 5px; }
-      .hof-list { list-style: none; padding: 0; margin: 0; }
-      .hof-list li { font-size: 1.15em; font-weight: bold; color: #334155; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-      .hof-list li span.hof-cnt { color: #059669; font-size: 0.9em; background: #d1fae5; padding: 2px 8px; border-radius: 10px; }
+      .hof-list { list-style: none; padding: 0; margin: 0; text-align: left; }
+      .hof-list li { font-size: 1.25em; font-weight: bold; color: #334155; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; border-bottom: 1px dashed #e2e8f0; padding-bottom: 8px; }
+      .hof-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+      .hof-list li span.hof-cnt { color: #059669; font-size: 0.9em; background: #d1fae5; padding: 3px 10px; border-radius: 12px; margin-left: auto; }
 
-      .close-btn { background: #e2e8f0; color: #475569; border: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; font-size: 1.1em; cursor: pointer; width: 100%; margin-top: 10px; transition: background 0.2s; }
+      .close-btn { background: #e2e8f0; color: #475569; border: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; font-size: 1.1em; cursor: pointer; width: 100%; margin-top: 15px; transition: background 0.2s; }
       
       .toast-message { position: fixed; bottom: 50%; left: 50%; transform: translate(-50%, 50%); background: rgba(30, 41, 59, 0.95); color: #4ade80; padding: 15px 30px; border-radius: 30px; font-family: 'Jua', sans-serif; font-size: 1.3em; white-space: nowrap; box-shadow: 0 10px 30px rgba(0,0,0,0.3); opacity: 0; visibility: hidden; transition: opacity 0.3s, transform 0.3s; z-index: 2000; pointer-events: none; }
       .toast-message.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
@@ -121,7 +123,7 @@
         .podium-medal { font-size: 2em; top: -30px; }
         .podium-class { font-size: 0.95em; padding: 3px 6px; }
         
-        .hof-btn { font-size: 1.1em; padding: 6px 15px; margin-bottom: 15px; }
+        .hof-btn { font-size: 1.1em; padding: 6px 15px; }
 
         .desktop-action-btns { display: none; }
         .footer-qr-bar { flex-direction: column; text-align: center; gap: 10px; padding: 15px; }
@@ -149,11 +151,14 @@
         <h2 class="panel-title" id="podium-title">🏆 재미로 보는 이번 달 독서 챔피언</h2>
         <div class="podium-container" id="podium"></div>
         
-        <!-- 명예의 전당 글씨 수정 완료 -->
-        <button class="hof-btn" onclick="document.getElementById('hofModal').style.display='flex'">👑 명예의 전당</button>
-
         <div class="rank-list-container">
           <ul id="ranking-list" class="rank-list"></ul>
+        </div>
+
+        <!-- 🚨 명예의 전당 버튼 위치 이동 & 호기심 유발 문구 추가 🚨 -->
+        <div class="hof-btn-wrapper">
+          <p class="hof-hint">🤔 지난달 우승 반은 어디였을까?</p>
+          <button class="hof-btn" onclick="document.getElementById('hofModal').style.display='flex'">👑 명예의 전당 👑</button>
         </div>
       </div>
     </div>
@@ -181,18 +186,19 @@
 
     <div id="custom-toast" class="toast-message">✨ 현황판 링크가 복사되었습니다! ✨</div>
 
+    <!-- 명예의 전당 모달 (왕관 타이틀 변경 완료) -->
     <div id="hofModal" class="modal-overlay">
       <div class="modal-content" style="max-width: 450px;">
-        <!-- 명예의 전당 모달 타이틀 글씨 수정 완료 -->
-        <h3 class="modal-title" style="color: #d97706;">👑 명예의 전당</h3>
-        <p style="color: #64748b; margin-top: -10px; margin-bottom: 20px; font-size: 0.95em;">
-          지난달에 가장 책을 많이 읽은 학급들입니다! 👏
+        <h3 class="modal-title" style="color: #d97706;">👑 명예의 전당 👑</h3>
+        <p style="color: #64748b; margin-top: -10px; margin-bottom: 15px; font-size: 0.95em;">
+          지난달에 가장 책을 많이 읽은 우승 학급입니다! 👏
         </p>
         <div id="hof-content">데이터를 분석하는 중...</div>
         <button class="close-btn" onclick="document.getElementById('hofModal').style.display='none'">닫기</button>
       </div>
     </div>
 
+    <!-- 앱 설치 안내 모달 -->
     <div id="installModal" class="modal-overlay">
       <div class="modal-content">
         <h3 class="modal-title">바탕화면에 바로가기 설치 ✨</h3>
@@ -213,8 +219,8 @@
     </div>
 
     <script>
-      // ⭐️ 선생님의 앱스 스크립트 웹앱 URL (배포 주소) - 절대 수정하지 마세요!
-      const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQMPrsDFuybbp1PJ4Yh3LrF8KtvNcM3E_Q8DSIHfkSrDnEt9QJCaR_nWW5uD33PxnrIQ/exec";
+      // 🚨 완벽하게 입력된 선생님의 찐 URL 주소!
+      const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxs4ui04O9UdTJujaThnmHNEVgY-CZQqkfsn9otYg0yAL-voOD0tPBFiqSCcZyJXmQlxA/exec";
       
       let lastReviewsDataString = "";
       let lastRanksDataString = "";
@@ -248,11 +254,15 @@
           .then(data => {
             if(data.error) {
               console.error("백엔드 에러:", data.error);
+              document.getElementById('reviews').innerHTML = `<p style='color:red; text-align:center;'>오류 발생: ${data.error}</p>`;
               return;
             }
             drawDashboard(data);
           })
-          .catch(err => console.error("데이터 로드 실패", err));
+          .catch(err => {
+            console.error("데이터 로드 실패", err);
+            document.getElementById('reviews').innerHTML = `<p style='color:red; text-align:center;'>데이터 연결 실패! URL을 확인하세요.</p>`;
+          });
       }
 
       function drawDashboard(data) {
@@ -273,7 +283,7 @@
           lastReviewsDataString = currentReviewsString;
         }
 
-        // 독립 단상 렌더링 로직 (공동 1위, 공동 2위 척척 배치)
+        // 시상대 렌더링
         const stats = data.classStats || [];
         const podiumDiv = document.getElementById('podium');
         
@@ -281,7 +291,6 @@
           podiumDiv.innerHTML = "<p style='text-align:center; color:#94a3b8; font-size:1.2em; width:100%;'>독서를 시작해 보세요!</p>";
           document.getElementById('ranking-list').innerHTML = "";
         } else {
-          // 상위 3개 반 추출 (순위가 같아도 독립적으로 분리)
           let top3 = stats.slice(0, 3);
           
           function getMedalAndClass(rank) {
@@ -307,7 +316,7 @@
           }
           podiumDiv.innerHTML = podiumHtml;
 
-          // 4번째 이후 하위 순위 리스트
+          // 4위 이하 랭킹
           let listHtml = ""; 
           let remainders = stats.slice(3);
           remainders.forEach(s => {
@@ -321,7 +330,7 @@
           }
         }
 
-        // 명예의 전당 렌더링
+        // 🚨 완벽하게 심플화된 명예의 전당 렌더링 🚨
         const currentHofString = JSON.stringify(data.hallOfFame);
         if (lastHofDataString !== currentHofString) {
           const hofContainer = document.getElementById('hof-content');
@@ -329,14 +338,27 @@
             hofContainer.innerHTML = "<p style='color:#94a3b8; font-size: 1.1em; padding: 20px 0;'>아직 지난 기록이 없어요!<br>이번 달 챔피언은 누가 될까요? 🚀</p>";
           } else {
             let hofHtml = "";
-            data.hallOfFame.forEach(monthData => {
-              hofHtml += `<div class="hof-month-section"><h4 class="hof-month-title">${monthData.month}</h4><ul class="hof-list">`;
-              monthData.topClasses.forEach(cls => {
-                let medal = cls.rank === 1 ? '🥇' : (cls.rank === 2 ? '🥈' : '🥉');
-                hofHtml += `<li>${medal} ${cls.rank}위 - ${cls.className} <span class="hof-cnt">${cls.count}</span></li>`;
-              });
-              hofHtml += `</ul></div>`;
+
+            // 1. 역대 통합 1위 (왕중왕) 박스 추가
+            if (data.allTimeChampions && data.allTimeChampions.length > 0) {
+              let champs = data.allTimeChampions.map(c => `${c.className}`).join(", ");
+              let maxCount = data.allTimeChampions[0].count;
+              hofHtml += `
+                <div style="background-color: #fefce8; border: 2px solid #fde047; border-radius: 12px; padding: 15px; margin-bottom: 20px;">
+                  <h4 style="font-family: 'Jua', sans-serif; color: #ca8a04; font-size: 1.3em; margin: 0 0 5px 0;">🏆 역대 최고 독서량 🏆</h4>
+                  <div style="font-size: 1.2em; font-weight: 900; color: #1e293b;">${champs} <span style="color: #ea580c; font-size: 0.9em;">(${maxCount}권)</span></div>
+                </div>
+              `;
+            }
+
+            // 2. 월별 우승 반 리스트 (깔끔한 한 줄 텍스트)
+            hofHtml += `<ul class="hof-list">`;
+            data.hallOfFame.forEach(item => {
+              // item 구조는 {month: "7월", className: "3학년 1반", count: 123} 형태
+              hofHtml += `<li><span style="font-size: 1.1em;">👑</span> [${item.month}] ${item.className} <span class="hof-cnt">(${item.count}권)</span></li>`;
             });
+            hofHtml += `</ul>`;
+
             hofContainer.innerHTML = hofHtml;
           }
           lastHofDataString = currentHofString;
