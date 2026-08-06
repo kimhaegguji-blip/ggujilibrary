@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>도서관 독서 마라톤 챔피언 현황판</title>
-    <!-- iOS 홈 화면 추가를 위한 메타 태그 -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="독서마라톤">
@@ -27,7 +26,7 @@
         color: var(--text);
         margin: 0;
         padding: 0;
-        padding-bottom: 150px; /* 모바일 바와 겹치지 않게 여유 공간 */
+        padding-bottom: 150px; 
       }
 
       .header {
@@ -225,7 +224,7 @@
       .btn-share { background: linear-gradient(135deg, #7c3aed, #8b5cf6); }
 
       .mobile-nav-bar {
-        display: none; /* PC에서는 숨김 */
+        display: none; 
         position: fixed;
         bottom: 0;
         left: 0;
@@ -241,7 +240,7 @@
         flex: 1;
         text-align: center;
         padding: 15px 5px;
-        font-size: 0.95rem; /* 글자 크기 최적화 */
+        font-size: 0.95rem; 
         font-weight: bold;
         color: white;
         text-decoration: none;
@@ -336,9 +335,9 @@
       .toast-message.show { opacity: 1; }
 
       @media (max-width: 768px) {
-        .pc-info-bar .action-buttons { display: none; } /* 모바일에서는 PC 버튼 숨김 */
+        .pc-info-bar .action-buttons { display: none; }
         .qr-section { width: 100%; justify-content: center; }
-        .mobile-nav-bar { display: flex; } /* 모바일에서는 하단 바 표시 */
+        .mobile-nav-bar { display: flex; }
         body { padding-bottom: 80px; }
       }
     </style>
@@ -441,7 +440,7 @@
     </div>
 
     <script>
-      // 🚨🚨🚨 [가장 중요!] 선생님께서 제공해주신 진짜 주소를 정확히 삽입했습니다! 🚨🚨🚨
+      // 🚨 선생님의 찐 URL 주소가 완벽하게 들어있습니다!
       const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxs4ui04O9UdTJujaThnmHNEVgY-CZQqkfsn9otYg0yAL-voOD0tPBFiqSCcZyJXmQlxA/exec";
 
       function shareApp() {
@@ -469,7 +468,7 @@
           .then(data => {
             if(data.error) {
               console.error("백엔드 에러:", data.error);
-              document.getElementById('reviews').innerHTML = `<p style='text-align:center; color:#ef4444; font-weight:bold; padding:20px;'>시트 오류: ${data.error}<br><br>명예의 전당 시트가 없거나 코드가 꼬였습니다.</p>`;
+              document.getElementById('reviews').innerHTML = `<p style='text-align:center; color:#ef4444; font-weight:bold; padding:20px;'>시트 오류: ${data.error}</p>`;
               document.getElementById('podium').innerHTML = `<p style='text-align:center; color:#ef4444; width:100%; font-weight:bold;'>데이터 연동 실패</p>`;
               return;
             }
@@ -477,7 +476,7 @@
           })
           .catch(err => {
             console.error("데이터 로드 실패", err);
-            document.getElementById('reviews').innerHTML = `<p style='text-align:center; color:#ef4444; font-weight:bold; padding:20px; line-height:1.6;'>데이터 연결 실패!<br><br>Index.html 코드의<br><b>GOOGLE_APP_SCRIPT_URL</b> 주소가<br>올바른지 확인해 주세요!</p>`;
+            document.getElementById('reviews').innerHTML = `<p style='text-align:center; color:#ef4444; font-weight:bold; padding:20px; line-height:1.6;'>데이터 연결 실패!<br>인터넷을 확인해 주세요!</p>`;
           });
       }
 
@@ -531,7 +530,7 @@
                 allTimeContainer.innerHTML = allTimeHTML;
             }
 
-            // 월별 1위 리스트 렌더링 (심플 버전)
+            // 월별 1위 리스트 렌더링 (심플 버전 - 1위만 노출되도록 백엔드에서 처리됨)
             let listHTML = `<p style="color:#64748b; font-weight:bold; margin-bottom:10px; text-align:left;">📅 월별 챔피언</p>`;
             data.hallOfFame.forEach(item => {
                 listHTML += `<div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; margin-bottom:8px; text-align:left;">
