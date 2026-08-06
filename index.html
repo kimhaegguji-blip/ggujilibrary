@@ -1,4 +1,449 @@
-<!-- ... existing code ... -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도서관 독서 마라톤 챔피언 현황판</title>
+    <!-- iOS 홈 화면 추가를 위한 메타 태그 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="독서마라톤">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3382/3382433.png">
+    
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;700&display=swap');
+      
+      :root {
+        --primary: #4f46e5;
+        --secondary: #ec4899;
+        --bg: #f8fafc;
+        --card-bg: #ffffff;
+        --text: #1e293b;
+      }
+
+      body {
+        font-family: 'Noto Sans KR', sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        margin: 0;
+        padding: 0;
+        padding-bottom: 150px; /* 모바일 바와 겹치지 않게 여유 공간 */
+      }
+
+      .header {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      }
+
+      .header h1 {
+        font-family: 'Jua', sans-serif;
+        margin: 0;
+        font-size: 2.2rem;
+        letter-spacing: 2px;
+      }
+
+      .notice-ticker {
+        background-color: #fef3c7;
+        color: #b45309;
+        padding: 10px;
+        font-weight: bold;
+        overflow: hidden;
+        white-space: nowrap;
+        border-bottom: 2px solid #fde68a;
+      }
+
+      .notice-ticker p {
+        display: inline-block;
+        margin: 0;
+        animation: ticker 15s linear infinite;
+      }
+
+      @keyframes ticker {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+      }
+
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .panel {
+        background: var(--card-bg);
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        flex: 1;
+        min-width: 320px;
+      }
+
+      .panel-title {
+        font-family: 'Jua', sans-serif;
+        color: var(--primary);
+        font-size: 1.5rem;
+        border-bottom: 2px dashed #cbd5e1;
+        padding-bottom: 10px;
+        margin-top: 0;
+      }
+
+      .podium-container {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 15px;
+        height: 250px;
+        margin-top: 20px;
+        padding-bottom: 10px;
+      }
+
+      .podium-step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        width: 30%;
+        border-radius: 10px 10px 0 0;
+        padding: 10px;
+        text-align: center;
+        transition: all 0.5s ease;
+      }
+
+      .podium-step.gold {
+        background: linear-gradient(to top, #fde047, #fef08a);
+        height: 90%;
+        box-shadow: 0 -5px 15px rgba(250, 204, 21, 0.4);
+      }
+
+      .podium-step.silver {
+        background: linear-gradient(to top, #e2e8f0, #f8fafc);
+        height: 70%;
+        box-shadow: 0 -5px 15px rgba(148, 163, 184, 0.2);
+      }
+
+      .podium-step.bronze {
+        background: linear-gradient(to top, #fed7aa, #ffedd5);
+        height: 50%;
+        box-shadow: 0 -5px 15px rgba(217, 119, 6, 0.2);
+      }
+
+      .medal {
+        font-size: 2.5rem;
+        margin-bottom: 5px;
+        filter: drop-shadow(0 4px 4px rgba(0,0,0,0.2));
+      }
+
+      .podium-class { font-weight: bold; color: #1e293b; font-size: 1.1rem; }
+      .podium-count { color: #ef4444; font-weight: bold; font-size: 1.3rem; margin-top: 5px; }
+
+      .rank-list { list-style: none; padding: 0; margin-top: 20px; }
+      .rank-list li {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 15px;
+        border-bottom: 1px solid #f1f5f9;
+        font-size: 1.1rem;
+      }
+      .rank-list li:nth-child(even) { background-color: #f8fafc; }
+      .rank-list li .rank { font-weight: bold; color: var(--primary); width: 30px; }
+      .rank-list li .count { font-weight: bold; color: var(--secondary); }
+
+      .review-card {
+        background: #f8fafc;
+        border-left: 5px solid var(--secondary);
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        animation: slideIn 0.5s ease-out;
+      }
+
+      @keyframes slideIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .review-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem; color: #64748b; }
+      .review-title { font-weight: bold; color: var(--text); font-size: 1.1rem; margin-bottom: 5px; }
+      .review-text { color: #334155; line-height: 1.5; }
+      .stars { color: #fbbf24; font-size: 1.2rem; }
+      
+      .loading {
+        text-align: center;
+        padding: 40px;
+        font-size: 1.2rem;
+        color: #64748b;
+        font-weight: bold;
+      }
+
+      .pc-info-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        margin: 20px auto;
+        max-width: 1160px;
+      }
+
+      .qr-section { display: flex; gap: 30px; }
+      .qr-item { text-align: center; }
+      .qr-item img { width: 100px; height: 100px; border-radius: 10px; border: 2px solid #e2e8f0; }
+      .qr-item p { margin: 5px 0 0 0; font-weight: bold; color: #475569; font-size: 0.9rem; }
+
+      .action-buttons {
+        display: flex;
+        gap: 10px;
+      }
+      
+      .action-btn {
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-weight: bold;
+        font-size: 1.1rem;
+        text-decoration: none;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      
+      .action-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+      .btn-write { background: linear-gradient(135deg, #4f46e5, #6366f1); }
+      .btn-install { background: linear-gradient(135deg, #059669, #10b981); }
+      .btn-share { background: linear-gradient(135deg, #7c3aed, #8b5cf6); }
+
+      .mobile-nav-bar {
+        display: none; /* PC에서는 숨김 */
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: white;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        z-index: 1000;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      .nav-item {
+        flex: 1;
+        text-align: center;
+        padding: 15px 5px;
+        font-size: 0.95rem; /* 글자 크기 최적화 */
+        font-weight: bold;
+        color: white;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        border-right: 1px solid rgba(255,255,255,0.2);
+        white-space: nowrap;
+      }
+
+      .nav-item:last-child { border-right: none; }
+      .nav-write { background-color: #4f46e5; }
+      .nav-install { background-color: #059669; }
+      .nav-share { background-color: #7c3aed; }
+
+      .hof-btn {
+        display: block;
+        width: 100%;
+        background: linear-gradient(135deg, #f59e0b, #fbbf24);
+        color: white;
+        text-align: center;
+        padding: 15px;
+        border-radius: 12px;
+        font-weight: bold;
+        font-size: 1.2rem;
+        text-decoration: none;
+        margin-top: 20px;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(245, 158, 11, 0.3);
+        transition: transform 0.2s;
+      }
+      .hof-btn:hover { transform: scale(1.02); }
+
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.5);
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+      }
+
+      .modal-content {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+        position: relative;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      }
+
+      .modal-title {
+        font-family: 'Jua', sans-serif;
+        font-size: 1.8rem;
+        margin-top: 0;
+        margin-bottom: 20px;
+      }
+
+      .modal-close {
+        background: #e2e8f0;
+        color: #475569;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-weight: bold;
+        margin-top: 20px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 1.1rem;
+      }
+
+      .toast-message {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 15px 25px;
+        border-radius: 30px;
+        font-weight: bold;
+        z-index: 9999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+      .toast-message.show { opacity: 1; }
+
+      @media (max-width: 768px) {
+        .pc-info-bar .action-buttons { display: none; } /* 모바일에서는 PC 버튼 숨김 */
+        .qr-section { width: 100%; justify-content: center; }
+        .mobile-nav-bar { display: flex; } /* 모바일에서는 하단 바 표시 */
+        body { padding-bottom: 80px; }
+      }
+    </style>
+</head>
+<body>
+
+    <div class="notice-ticker">
+        <p id="notice-text">📢 공지사항을 불러오는 중입니다...</p>
+    </div>
+
+    <div class="header">
+        <h1>📚 우리 학교 독서 마라톤 챔피언</h1>
+    </div>
+
+    <div class="container">
+      <div class="panel rank-panel">
+        <h2 class="panel-title" id="podium-title">🏆 재미로 보는 이번 달 독서 챔피언</h2>
+        <div class="podium-container" id="podium">
+          <!-- Podium is drawn here via JS -->
+        </div>
+        
+        <button class="hof-btn" onclick="document.getElementById('hofModal').style.display='flex'">👑 명예의 전당</button>
+
+        <div class="rank-list-container">
+          <ul id="ranking-list" class="rank-list"></ul>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 class="panel-title">📝 실시간 한 줄 감상평</h2>
+        <div id="reviews">
+          <div class="loading">데이터를 불러오는 중입니다...<br><span style="font-size:0.8em; color:#94a3b8;">(최대 10초 소요)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pc-info-bar">
+      <div class="qr-section">
+        <div class="qr-item">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://forms.gle/선생님폼주소" alt="QR Form">
+          <p>📝 감상평 남기기</p>
+        </div>
+        <div class="qr-item">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://kimhaegguji-blip.github.io/ggujilibrary/" alt="QR App">
+          <p>📊 실시간 현황판</p>
+        </div>
+      </div>
+      <div class="action-buttons">
+        <a href="https://forms.gle/선생님폼주소" target="_blank" class="action-btn btn-write">✏️ 감상평 남기기</a>
+        <button onclick="document.getElementById('installModal').style.display='flex'" class="action-btn btn-install">💻 바탕화면에 설치</button>
+        <button onclick="shareApp()" class="action-btn btn-share">🔗 현황판 링크 공유</button>
+      </div>
+    </div>
+
+    <!-- 모바일 전용 하단 고정 탭 바 -->
+    <div class="mobile-nav-bar">
+      <a href="https://forms.gle/선생님폼주소" target="_blank" class="nav-item nav-write">
+        <span style="font-size: 1.2rem;">✏️</span>
+        <span>감상평 쓰기</span>
+      </a>
+      <a href="#" onclick="document.getElementById('installModal').style.display='flex'" class="nav-item nav-install">
+        <span style="font-size: 1.2rem;">📱</span>
+        <span>앱 설치하기</span>
+      </a>
+      <a href="#" onclick="shareApp()" class="nav-item nav-share">
+        <span style="font-size: 1.2rem;">🔗</span>
+        <span>링크 공유</span>
+      </a>
+    </div>
+
+    <div id="custom-toast" class="toast-message">✨ 현황판 링크가 복사되었습니다! ✨</div>
+
+    <!-- 명예의 전당 모달 -->
+    <div id="hofModal" class="modal-overlay">
+      <div class="modal-content" style="max-width: 450px;">
+        <h3 class="modal-title" style="color: #d97706;">👑 명예의 전당</h3>
+        
+        <!-- 역대 통합 1위 표시 영역 -->
+        <div id="all-time-champion-container"></div>
+        
+        <!-- 월별 1위 리스트 -->
+        <div id="hof-list" style="max-height: 250px; overflow-y: auto; margin-top: 15px;"></div>
+        
+        <button class="modal-close" onclick="document.getElementById('hofModal').style.display='none'">닫기</button>
+      </div>
+    </div>
+
+    <!-- 설치 안내 모달 -->
+    <div id="installModal" class="modal-overlay">
+      <div class="modal-content">
+        <h3 class="modal-title" style="color: #059669;">💻 기기별 설치 안내 📱</h3>
+        <div style="text-align: left; font-size: 0.95rem; line-height: 1.6; color: #334155; margin-bottom: 20px;">
+          <p><strong>[PC / 노트북 (크롬, 엣지)]</strong><br>주소창 오른쪽 끝에 있는 <strong>[모니터+화살표] 모양 아이콘</strong>을 클릭하여 설치해 주세요!</p>
+          <hr style="border: 0; border-top: 1px dashed #cbd5e1; margin: 15px 0;">
+          <p><strong>[아이폰 (Safari)]</strong><br>화면 하단의 <strong>[공유] 아이콘</strong>을 누르고 <strong>'홈 화면에 추가'</strong>를 선택해 주세요.</p>
+          <p style="margin-top: 10px;"><strong>[갤럭시 (Chrome)]</strong><br>화면 우측 상단의 <strong>[점 3개] 메뉴</strong>를 누르고 <strong>'홈 화면에 추가'</strong>를 선택해 주세요.</p>
+        </div>
+        <button class="modal-close" onclick="document.getElementById('installModal').style.display='none'">확인했어요!</button>
+      </div>
+    </div>
+
+    <script>
+      // 🚨🚨🚨 [가장 중요!] 선생님께서 제공해주신 진짜 주소를 정확히 삽입했습니다! 🚨🚨🚨
+      const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxs4ui04O9UdTJujaThnmHNEVgY-CZQqkfsn9otYg0yAL-voOD0tPBFiqSCcZyJXmQlxA/exec";
+
       function shareApp() {
         const shareUrl = "https://kimhaegguji-blip.github.io/ggujilibrary/";
         if (navigator.share && /Mobi|Android/i.test(navigator.userAgent)) {
@@ -24,7 +469,7 @@
           .then(data => {
             if(data.error) {
               console.error("백엔드 에러:", data.error);
-              document.getElementById('reviews').innerHTML = `<p style='text-align:center; color:#ef4444; font-weight:bold; padding:20px;'>시트 오류: ${data.error}<br>시트 이름(설문지 응답 시트1)이 정확한지 확인해주세요.</p>`;
+              document.getElementById('reviews').innerHTML = `<p style='text-align:center; color:#ef4444; font-weight:bold; padding:20px;'>시트 오류: ${data.error}<br><br>명예의 전당 시트가 없거나 코드가 꼬였습니다.</p>`;
               document.getElementById('podium').innerHTML = `<p style='text-align:center; color:#ef4444; width:100%; font-weight:bold;'>데이터 연동 실패</p>`;
               return;
             }
@@ -32,26 +477,98 @@
           })
           .catch(err => {
             console.error("데이터 로드 실패", err);
-            document.getElementById('reviews').innerHTML = `<p style='text-align:center; color:#ef4444; font-weight:bold; padding:20px;'>데이터 연결 실패!<br>Index.html의 GOOGLE_APP_SCRIPT_URL 주소가 변경되었거나,<br>배포 권한이 '모든 사용자'가 아닐 수 있습니다.</p>`;
+            document.getElementById('reviews').innerHTML = `<p style='text-align:center; color:#ef4444; font-weight:bold; padding:20px; line-height:1.6;'>데이터 연결 실패!<br><br>Index.html 코드의<br><b>GOOGLE_APP_SCRIPT_URL</b> 주소가<br>올바른지 확인해 주세요!</p>`;
           });
       }
 
       function drawDashboard(data) {
         if (data.notice && data.notice.trim() !== "") {
-<!-- ... existing code ... -->
-```
+          document.getElementById('notice-text').innerText = "📢 " + data.notice;
+        } else {
+          document.querySelector('.notice-ticker').style.display = 'none';
+        }
 
-이 코드를 적용하시고 현황판을 새로고침 해보시면, 이제 "데이터를 불러오는 중..."에서 멈추지 않고 **빨간색 에러 메시지**가 뜰 것입니다. 
+        const podium = document.getElementById('podium');
+        const rankList = document.getElementById('ranking-list');
+        const now = new Date();
+        document.getElementById('podium-title').innerText = `🏆 재미로 보는 ${now.getMonth() + 1}월 독서 챔피언`;
+        
+        podium.innerHTML = "";
+        rankList.innerHTML = "";
 
-그 메시지에 따라 아래 3가지를 점검해 주세요!
+        if (data.classStats && data.classStats.length > 0) {
+          const top3 = data.classStats.filter(s => s.rank <= 3);
+          
+          let rank2 = top3.find(s => s.rank === 2);
+          let rank1 = top3.find(s => s.rank === 1);
+          let rank3 = top3.find(s => s.rank === 3);
 
-**🕵️‍♂️ 체크리스트 (순서대로 확인)**
+          if(rank2) podium.innerHTML += `<div class="podium-step silver"><div class="medal">🥈</div><div class="podium-class">${rank2.className}</div><div class="podium-count">${rank2.count}권</div></div>`;
+          if(rank1) podium.innerHTML += `<div class="podium-step gold"><div class="medal">🥇</div><div class="podium-class">${rank1.className}</div><div class="podium-count">${rank1.count}권</div></div>`;
+          if(rank3) podium.innerHTML += `<div class="podium-step bronze"><div class="medal">🥉</div><div class="podium-class">${rank3.className}</div><div class="podium-count">${rank3.count}권</div></div>`;
 
-1. **시트 이름 확인 (가장 흔한 실수!):**
-   구글 스프레드시트 아래쪽 탭 이름이 정확히 띄어쓰기까지 **`설문지 응답 시트1`** 이어야 합니다. (`설문지 응답 시트 1` 처럼 띄어쓰기가 다르거나 이름이 다르면 에러가 납니다.)
-2. **배포 권한 확인 (액세스 위치):**
-   구글 앱스 스크립트에서 [배포 관리] -> [수정 ✏️]을 누르셨을 때, 맨 아래 **액세스 위치(Who has access)**가 반드시 **`모든 사용자(Anyone)`**로 되어 있어야 합니다. (선생님 본인만 허용되어 있으면 앱이 데이터를 못 읽어옵니다.)
-3. **URL 주소 확인:**
-   앱스 스크립트에서 '새 배포'를 잘못 누르셔서 배포 주소가 변경되었을 수 있습니다. 앱스 스크립트 배포 창에 있는 **웹앱 URL(https://script.google.com/macros/.../exec)**을 복사해서, `Index.html` 파일 안의 `const GOOGLE_APP_SCRIPT_URL = "여기에 붙여넣기";` 부분과 똑같은지 확인해 보세요.
+          data.classStats.forEach(stat => {
+            if(stat.rank > 3 && stat.rank <= 10) {
+              rankList.innerHTML += `<li><span class="rank">${stat.rank}위</span> <span>${stat.className}</span> <span class="count">${stat.count}권</span></li>`;
+            }
+          });
+        } else {
+          podium.innerHTML = "<p style='color:#64748b; font-weight:bold; margin-top:50px;'>이번 달 첫 번째 챔피언에 도전하세요! 🏃‍♂️</p>";
+        }
 
-빨간색 글씨로 어떤 에러가 나오는지 확인해 보시고, 그래도 해결이 안 되시면 그 빨간 메시지를 저에게 알려주세요! 원인을 단번에 찾아드리겠습니다. 🚀
+        const hofList = document.getElementById('hof-list');
+        const allTimeContainer = document.getElementById('all-time-champion-container');
+        
+        if (data.hallOfFame && data.hallOfFame.length > 0) {
+            // 역대 통합 1위 렌더링
+            if (data.allTimeChampions && data.allTimeChampions.length > 0) {
+                let allTimeHTML = `<div style="background:#fef3c7; border:2px solid #fbbf24; border-radius:15px; padding:15px; margin-bottom:20px;">
+                    <p style="margin:0; font-weight:bold; color:#d97706; font-size:1.1em;">🏆 역대 통합 1위 🏆</p>`;
+                data.allTimeChampions.forEach(champ => {
+                    allTimeHTML += `<p style="margin:5px 0 0 0; font-size:1.2em; font-weight:bold; color:#b45309;">${champ.className} <span style="font-size:0.8em; color:#d97706;">(${champ.count}권)</span></p>`;
+                });
+                allTimeHTML += `</div>`;
+                allTimeContainer.innerHTML = allTimeHTML;
+            }
+
+            // 월별 1위 리스트 렌더링 (심플 버전)
+            let listHTML = `<p style="color:#64748b; font-weight:bold; margin-bottom:10px; text-align:left;">📅 월별 챔피언</p>`;
+            data.hallOfFame.forEach(item => {
+                listHTML += `<div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; margin-bottom:8px; text-align:left;">
+                    <span style="font-weight:bold; color:#475569; display:inline-block; width:45px;">[${item.month}]</span>
+                    <span style="font-weight:bold; color:#0f172a; margin-left:5px;">${item.className}</span>
+                    <span style="color:#ef4444; font-weight:bold; float:right;">${item.count}권</span>
+                </div>`;
+            });
+            hofList.innerHTML = listHTML;
+        } else {
+            allTimeContainer.innerHTML = "";
+            hofList.innerHTML = `<p style="padding:20px; color:#94a3b8;">아직 기록된 챔피언이 없습니다.</p>`;
+        }
+
+        const reviewsContainer = document.getElementById('reviews');
+        if (data.recentReviews && data.recentReviews.length > 0) {
+          reviewsContainer.innerHTML = "";
+          data.recentReviews.forEach(rev => {
+            reviewsContainer.innerHTML += `
+              <div class="review-card">
+                <div class="review-header">
+                  <span>${rev.emotion} ${rev.cls}</span>
+                  <span class="stars">${rev.stars}</span>
+                </div>
+                <div class="review-title">${rev.title}</div>
+                <div class="review-text">${rev.review}</div>
+              </div>
+            `;
+          });
+        } else {
+          reviewsContainer.innerHTML = "<p class='loading'>아직 등록된 감상평이 없습니다.<br>첫 번째 감상평의 주인공이 되어보세요! ✨</p>";
+        }
+      }
+
+      // 페이지 로드 시 즉시 실행 및 10초마다 갱신
+      updateDashboard();
+      setInterval(updateDashboard, 10000);
+    </script>
+</body>
+</html>
