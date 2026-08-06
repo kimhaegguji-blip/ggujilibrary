@@ -54,7 +54,6 @@
       .rank-item span.class-name { color: #334155; }
       .rank-item span.score { color: #059669; }
 
-      /* 선생님 요청 반영: 수평 정렬되는 명예의 전당 박스 */
       .hof-btn-wrapper { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 15px; margin-bottom: 5px; padding: 12px; background: #fffbeb; border-radius: 12px; border: 2px dashed #fcd34d; }
       .hof-hint { font-family: 'Noto Sans KR', sans-serif; font-size: 1.05em; color: #475569; font-weight: 700; margin: 0; animation: bounce 2s infinite; }
       @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
@@ -76,16 +75,19 @@
       .btn-install { background: linear-gradient(135deg, #10b981, #059669); }
 
       .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px; box-sizing: border-box; backdrop-filter: blur(3px); }
-      .modal-content { background: white; padding: 30px; border-radius: 20px; width: 100%; max-width: 400px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.2); text-align: center; }
+      .modal-content { background: white; padding: 30px; border-radius: 20px; width: 100%; max-width: 450px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.2); text-align: center; }
       .modal-title { font-family: 'Jua', sans-serif; font-size: 1.8em; color: #1e293b; margin-top: 0; margin-bottom: 15px; }
       
+      /* 명예의 전당 새 디자인 CSS */
+      .hof-item-container { display: flex; align-items: center; justify-content: space-between; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px 15px; margin-bottom: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); text-align: left; }
+      .hof-item-left { display: flex; align-items: center; gap: 10px; flex: 1; }
+      .hof-month-badge { background: #3b82f6; color: white; font-family: 'Jua', sans-serif; padding: 4px 12px; border-radius: 20px; font-size: 1em; white-space: nowrap; box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2); }
+      .hof-classes { font-weight: 900; color: #1e293b; font-size: 1.15em; word-break: keep-all; }
+      .hof-count-badge { background: #ffedd5; color: #ea580c; font-weight: bold; padding: 5px 12px; border-radius: 8px; font-size: 1.05em; white-space: nowrap; margin-left: 10px; }
+
       .os-guide { background: #f8fafc; border-radius: 12px; padding: 15px; margin-bottom: 12px; text-align: left; border-left: 5px solid #3b82f6; }
       .os-title { font-weight: 900; font-size: 1.1em; color: #334155; margin-bottom: 5px; }
       .os-desc { color: #475569; font-size: 0.95em; line-height: 1.4; word-break: keep-all; }
-      
-      .hof-list { list-style: none; padding: 0; margin: 0; text-align: left; }
-      .hof-list li { font-size: 1.25em; font-weight: bold; color: #334155; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; border-bottom: 1px dashed #e2e8f0; padding-bottom: 8px; }
-      .hof-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 
       .modal-close { background: #e2e8f0; color: #475569; border: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; font-size: 1.1em; cursor: pointer; width: 100%; margin-top: 15px; transition: background 0.2s; }
       
@@ -119,10 +121,13 @@
         .podium-medal { font-size: 2em; top: -30px; }
         .podium-class { font-size: 0.95em; padding: 3px 6px; }
         
-        /* 모바일 명예의전당 버튼 사이즈 조절 */
         .hof-btn-wrapper { flex-direction: column; gap: 8px; padding: 10px; }
         .hof-hint { font-size: 4vw; }
         .hof-btn { font-size: 1.1em; padding: 6px 15px; width: 100%; }
+        
+        .hof-item-container { padding: 10px; }
+        .hof-classes { font-size: 1.05em; }
+        .hof-count-badge { padding: 4px 8px; font-size: 0.95em; }
 
         .desktop-action-btns { display: none; }
         .footer-qr-bar { flex-direction: column; text-align: center; gap: 10px; padding: 15px; }
@@ -136,7 +141,6 @@
   </head>
   <body>
     <div class="header">📚 독서 마라톤 챔피언 현황판 🚀</div>
-    
     <div class="notice-bar" id="notice-bar"><span class="marquee" id="notice-text"></span></div>
 
     <div class="container">
@@ -153,7 +157,6 @@
           <ul id="ranking-list" class="rank-list"></ul>
         </div>
 
-        <!-- 🚨 선생님 요청 1: 랭킹 하단에 가로로 나란히 배치 & 버튼 왕관 제거 🚨 -->
         <div class="hof-btn-wrapper">
           <p class="hof-hint">🤔 지난달 독서 챔피언 학급이 궁금하다면? 👉</p>
           <button class="hof-btn" onclick="document.getElementById('hofModal').style.display='flex'">명예의 전당</button>
@@ -185,10 +188,10 @@
     <div id="custom-toast" class="toast-message">✨ 현황판 링크가 복사되었습니다! ✨</div>
 
     <div id="hofModal" class="modal-overlay">
-      <div class="modal-content" style="max-width: 450px;">
+      <div class="modal-content">
         <h3 class="modal-title" style="color: #d97706;">👑 명예의 전당 👑</h3>
-        <p style="color: #64748b; margin-top: -10px; margin-bottom: 15px; font-size: 0.95em;">
-          지난달에 가장 책을 많이 읽은 우승 학급입니다! 👏
+        <p style="color: #64748b; margin-top: -10px; margin-bottom: 20px; font-size: 0.95em; font-weight: bold;">
+          과연 지난달에 가장 책을 많이 읽은 학급은 어디일까요? 👏
         </p>
         <div id="hof-content">데이터를 분석하는 중...</div>
         <button class="modal-close" onclick="document.getElementById('hofModal').style.display='none'">닫기</button>
@@ -215,7 +218,7 @@
     </div>
 
     <script>
-      // 🚨🚨🚨 [가장 중요!] 방금 새로 발급받은 '새 웹앱 URL'을 아래 따옴표 안에 꼭! 붙여넣으세요! 🚨🚨🚨
+      // 🚨 선생님의 최신 URL 🚨
       const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwVLIOQ41kB7MT2CVl-BdIIYkMN5extgEOdQEgwqEDTHs2L6n6N-8RD8WW5Lf-ndF1TZg/exec";
       
       let lastReviewsDataString = "";
@@ -245,29 +248,24 @@
       }
 
       function updateDashboard() {
-        // 🚨 새로 추가된 에러 추적 시스템 🚨 (문제가 생기면 빨간 글씨로 띄워줍니다)
         fetch(GOOGLE_APP_SCRIPT_URL)
           .then(res => {
             if(!res.ok) throw new Error("HTTP 상태 에러: " + res.status);
-            return res.text(); // JSON이 아닌 HTML(구글 에러페이지)이 올 것을 대비해 우선 텍스트로 받음
+            return res.text(); 
           })
           .then(text => {
             try {
               const data = JSON.parse(text);
               if(data.error) {
-                // 구글 시트 백엔드 내부에서 발생한 에러
-                document.getElementById('reviews').innerHTML = `<p style='color:red; text-align:center; font-weight:bold; padding:20px;'>시트 백엔드 오류:<br>${data.error}</p>`;
+                document.getElementById('reviews').innerHTML = `<p style='color:red; text-align:center; font-weight:bold; padding:20px;'>백엔드 에러 발생:<br>${data.error}</p>`;
                 return;
               }
               drawDashboard(data);
             } catch(e) {
-              // URL 배포가 잘못되어 이상한 페이지(HTML)를 받아왔을 때 발생하는 에러
-              document.getElementById('reviews').innerHTML = `<p style='color:red; text-align:center; font-weight:bold; padding:20px;'>데이터 연동 실패!<br>구글 스크립트 '새 버전 배포'를 다시 진행해주세요.</p>`;
-              console.error("받아온 내용이 JSON이 아닙니다:", text);
+              document.getElementById('reviews').innerHTML = `<p style='color:red; text-align:center; font-weight:bold; padding:20px;'>데이터 연동 실패!<br>구글 스크립트 배포 시 권한 설정을 확인해주세요.</p><p style='font-size:0.8em; color:gray;'>${e.message}</p>`;
             }
           })
           .catch(err => {
-            // 인터넷 연결 문제나 URL 자체가 완전히 잘못되었을 때 발생하는 에러
             document.getElementById('reviews').innerHTML = `<p style='color:red; text-align:center; font-weight:bold; padding:20px;'>통신 오류 발생:<br>${err.message}<br>인터넷 연결이나 웹앱 주소를 확인하세요.</p>`;
           });
       }
@@ -278,7 +276,6 @@
           document.getElementById('notice-bar').style.display = "block";
         } else { document.getElementById('notice-bar').style.display = "none"; }
 
-        // 1. 감상평 렌더링
         const currentReviewsString = JSON.stringify(data.recentReviews);
         if (lastReviewsDataString !== currentReviewsString) {
           let reviewHtml = data.recentReviews.length === 0 ? "<p style='text-align:center; color:#94a3b8; font-size:1.2em; padding-top:20px;'>이번 달은 아직 등록된 감상평이 없어요!</p>" : "";
@@ -290,7 +287,6 @@
           lastReviewsDataString = currentReviewsString;
         }
 
-        // 2. 시상대 렌더링
         const stats = data.classStats || [];
         const podiumDiv = document.getElementById('podium');
         
@@ -336,7 +332,6 @@
           }
         }
 
-        // 3. 명예의 전당 렌더링
         const currentHofString = JSON.stringify(data.hallOfFame);
         if (lastHofDataString !== currentHofString) {
           const hofContainer = document.getElementById('hof-content');
@@ -346,22 +341,42 @@
             let hofHtml = "";
 
             if (data.allTimeChampions && data.allTimeChampions.length > 0) {
+              // 역대 1위 타이틀 변경 적용
               let champs = data.allTimeChampions.map(c => `${c.className}`).join(", ");
               let maxCount = data.allTimeChampions[0].count;
               hofHtml += `
-                <div style="background-color: #fefce8; border: 2px solid #fde047; border-radius: 12px; padding: 15px; margin-bottom: 20px;">
-                  <h4 style="font-family: 'Jua', sans-serif; color: #ca8a04; font-size: 1.3em; margin: 0 0 5px 0;">🏆 역대 최고 독서량 (왕중왕) 🏆</h4>
+                <div style="background-color: #fefce8; border: 2px solid #fde047; border-radius: 12px; padding: 15px; margin-bottom: 25px;">
+                  <h4 style="font-family: 'Jua', sans-serif; color: #ca8a04; font-size: 1.3em; margin: 0 0 5px 0;">🏆 역대 최고 독서 챔피언 🏆</h4>
                   <div style="font-size: 1.2em; font-weight: 900; color: #1e293b;">${champs} <span style="color: #ea580c; font-size: 0.9em;">(${maxCount}권)</span></div>
                 </div>
               `;
             }
 
-            hofHtml += `<ul class="hof-list">`;
+            // 공동 1위 학급을 월별로 깔끔하게 묶어주는 그룹화 로직
+            const groupedHofArray = [];
             data.hallOfFame.forEach(item => {
-              // 🚨 선생님 요청 3: 오직 1위만 심플하게 [7월] X학년 X반 (X권) 형식으로 출력
-              hofHtml += `<li style="justify-content: center;"><span style="font-size: 1.1em;">👑</span> [${item.month}] ${item.className} <span style="color: #ea580c; font-size: 0.9em; margin-left: 5px;">(${item.count}권)</span></li>`;
+               let existing = groupedHofArray.find(g => g.month === item.month);
+               if (existing) {
+                   existing.classes.push(item.className);
+               } else {
+                   groupedHofArray.push({ month: item.month, classes: [item.className], count: item.count });
+               }
             });
-            hofHtml += `</ul>`;
+
+            // 새로운 깔끔한 박스 디자인 적용
+            groupedHofArray.forEach(group => {
+              // 반이 여러 개일 경우 시각적 구분을 위해 파이프 기호( | ) 사용
+              let classesStr = group.classes.join("<span style='color:#cbd5e1; margin:0 6px; font-weight:400;'>|</span>");
+              hofHtml += `
+                <div class="hof-item-container">
+                  <div class="hof-item-left">
+                    <span class="hof-month-badge">${group.month}</span>
+                    <span class="hof-classes">${classesStr}</span>
+                  </div>
+                  <span class="hof-count-badge">${group.count}권</span>
+                </div>
+              `;
+            });
 
             hofContainer.innerHTML = hofHtml;
           }
