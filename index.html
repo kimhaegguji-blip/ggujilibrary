@@ -54,10 +54,11 @@
       .rank-item span.class-name { color: #334155; }
       .rank-item span.score { color: #059669; }
 
-      .hof-btn-wrapper { text-align: center; margin-top: 5px; margin-bottom: 10px; }
-      .hof-hint { font-family: 'Noto Sans KR', sans-serif; font-size: 0.95em; color: #475569; margin-bottom: 8px; font-weight: 700; animation: bounce 2s infinite; }
+      /* 선생님 요청 반영: 수평 정렬되는 명예의 전당 박스 */
+      .hof-btn-wrapper { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 15px; margin-bottom: 5px; padding: 12px; background: #fffbeb; border-radius: 12px; border: 2px dashed #fcd34d; }
+      .hof-hint { font-family: 'Noto Sans KR', sans-serif; font-size: 1.05em; color: #475569; font-weight: 700; margin: 0; animation: bounce 2s infinite; }
       @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
-      .hof-btn { display: inline-block; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; font-family: 'Jua', sans-serif; font-size: 1.25em; padding: 8px 25px; border-radius: 25px; border: none; cursor: pointer; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3); transition: transform 0.2s; }
+      .hof-btn { display: inline-block; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; font-family: 'Jua', sans-serif; font-size: 1.15em; padding: 8px 20px; border-radius: 25px; border: none; cursor: pointer; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3); transition: transform 0.2s; white-space: nowrap; margin: 0; }
       .hof-btn:hover { transform: scale(1.05); }
       .hof-btn:active { transform: scale(0.95); }
 
@@ -85,9 +86,8 @@
       .hof-list { list-style: none; padding: 0; margin: 0; text-align: left; }
       .hof-list li { font-size: 1.25em; font-weight: bold; color: #334155; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; border-bottom: 1px dashed #e2e8f0; padding-bottom: 8px; }
       .hof-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-      .hof-list li span.hof-cnt { color: #059669; font-size: 0.9em; background: #d1fae5; padding: 3px 10px; border-radius: 12px; margin-left: auto; }
 
-      .close-btn { background: #e2e8f0; color: #475569; border: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; font-size: 1.1em; cursor: pointer; width: 100%; margin-top: 15px; transition: background 0.2s; }
+      .modal-close { background: #e2e8f0; color: #475569; border: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; font-size: 1.1em; cursor: pointer; width: 100%; margin-top: 15px; transition: background 0.2s; }
       
       .toast-message { position: fixed; bottom: 50%; left: 50%; transform: translate(-50%, 50%); background: rgba(30, 41, 59, 0.95); color: #4ade80; padding: 15px 30px; border-radius: 30px; font-family: 'Jua', sans-serif; font-size: 1.3em; white-space: nowrap; box-shadow: 0 10px 30px rgba(0,0,0,0.3); opacity: 0; visibility: hidden; transition: opacity 0.3s, transform 0.3s; z-index: 2000; pointer-events: none; }
       .toast-message.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
@@ -108,11 +108,7 @@
         .review-title-group { flex-direction: column; align-items: flex-start; gap: 2px; }
         .rv-cls { font-size: 0.9em; margin: 0; }
         .rv-title-stars { display: flex; align-items: center; width: 100%; gap: 6px; }
-        .rv-title { font-size: 1.15em; font-weight: 900; color: #0f172a; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 0 1 auto; min-width: 0; }
-        .rv-stars { flex-shrink: 0; font-size: 0.9em; margin: 0; }
-        .review-content { display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 8px; width: 100%; }
-        .emotion-badge { padding: 4px 8px; font-size: 0.85em; flex-shrink: 0; }
-        .review-text { font-size: 1.05em; flex-shrink: 0; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .rv-title { font-size: 1.15em; font-weight: 900; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 0 1 auto; min-width: 0; }
         
         .podium-container { gap: 5px; height: 180px; margin-top: 25px; }
         .podium-step { width: 32%; }
@@ -123,12 +119,14 @@
         .podium-medal { font-size: 2em; top: -30px; }
         .podium-class { font-size: 0.95em; padding: 3px 6px; }
         
-        .hof-btn { font-size: 1.1em; padding: 6px 15px; }
+        /* 모바일 명예의전당 버튼 사이즈 조절 */
+        .hof-btn-wrapper { flex-direction: column; gap: 8px; padding: 10px; }
+        .hof-hint { font-size: 4vw; }
+        .hof-btn { font-size: 1.1em; padding: 6px 15px; width: 100%; }
 
         .desktop-action-btns { display: none; }
         .footer-qr-bar { flex-direction: column; text-align: center; gap: 10px; padding: 15px; }
         .qr-code-img { width: 100px; height: 100px; }
-        .qr-sub { font-size: 3.6vw; white-space: nowrap; letter-spacing: -0.5px; }
         
         .floating-menu { position: fixed; bottom: 0; left: 0; width: 100%; display: flex; flex-direction: row; z-index: 1000; box-shadow: 0 -4px 15px rgba(0,0,0,0.15); background: white; padding-bottom: env(safe-area-inset-bottom); }
         .fab-btn { flex: 1; display: flex; align-items: center; justify-content: center; padding: 16px 2px; font-family: 'Jua', sans-serif; font-size: min(3.8vw, 1.1em); color: white; border: none; cursor: pointer; text-decoration: none; border-right: 1px solid rgba(255,255,255,0.3); white-space: nowrap; letter-spacing: -0.5px; }
@@ -155,10 +153,10 @@
           <ul id="ranking-list" class="rank-list"></ul>
         </div>
 
-        <!-- 🚨 명예의 전당 버튼 위치 이동 & 호기심 유발 문구 추가 🚨 -->
+        <!-- 🚨 선생님 요청 1: 랭킹 하단에 가로로 나란히 배치 & 버튼 왕관 제거 🚨 -->
         <div class="hof-btn-wrapper">
-          <p class="hof-hint">🤔 지난달 우승 반은 어디였을까?</p>
-          <button class="hof-btn" onclick="document.getElementById('hofModal').style.display='flex'">👑 명예의 전당 👑</button>
+          <p class="hof-hint">🤔 지난달 독서 챔피언 학급이 궁금하다면? 👉</p>
+          <button class="hof-btn" onclick="document.getElementById('hofModal').style.display='flex'">명예의 전당</button>
         </div>
       </div>
     </div>
@@ -186,7 +184,6 @@
 
     <div id="custom-toast" class="toast-message">✨ 현황판 링크가 복사되었습니다! ✨</div>
 
-    <!-- 명예의 전당 모달 (왕관 타이틀 변경 완료) -->
     <div id="hofModal" class="modal-overlay">
       <div class="modal-content" style="max-width: 450px;">
         <h3 class="modal-title" style="color: #d97706;">👑 명예의 전당 👑</h3>
@@ -194,11 +191,10 @@
           지난달에 가장 책을 많이 읽은 우승 학급입니다! 👏
         </p>
         <div id="hof-content">데이터를 분석하는 중...</div>
-        <button class="close-btn" onclick="document.getElementById('hofModal').style.display='none'">닫기</button>
+        <button class="modal-close" onclick="document.getElementById('hofModal').style.display='none'">닫기</button>
       </div>
     </div>
 
-    <!-- 앱 설치 안내 모달 -->
     <div id="installModal" class="modal-overlay">
       <div class="modal-content">
         <h3 class="modal-title">바탕화면에 바로가기 설치 ✨</h3>
@@ -214,12 +210,12 @@
           <div class="os-title">🤖 안드로이드 (Chrome 브라우저)</div>
           <div class="os-desc">화면 오른쪽 위 <b>[메뉴 ⁝]</b> 버튼을 누른 후, 메뉴에서 <b>[홈 화면에 추가]</b>를 선택하세요!</div>
         </div>
-        <button class="close-btn" onclick="document.getElementById('installModal').style.display='none'">닫기</button>
+        <button class="modal-close" onclick="document.getElementById('installModal').style.display='none'">확인했어요!</button>
       </div>
     </div>
 
     <script>
-      // 🚨 완벽하게 입력된 선생님의 찐 URL 주소!
+      // 🚨 선생님의 완벽한 최신 배포 URL 주소 🚨
       const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxs4ui04O9UdTJujaThnmHNEVgY-CZQqkfsn9otYg0yAL-voOD0tPBFiqSCcZyJXmQlxA/exec";
       
       let lastReviewsDataString = "";
@@ -232,7 +228,7 @@
       function shareApp() {
         const shareUrl = "https://kimhaegguji-blip.github.io/ggujilibrary/";
         if (navigator.share && /Mobi|Android/i.test(navigator.userAgent)) {
-          navigator.share({ title: "독서 마라톤 챔피언 현황판", text: "우리 학교 독서 마라톤 현황판 확인하기!", url: shareUrl }).catch(err => console.log('공유 취소:', err));
+          navigator.share({ title: "독서 마라톤 현황판", url: shareUrl }).catch(err => console.log('공유 취소'));
         } else {
           const textArea = document.createElement("textarea");
           textArea.value = shareUrl;
@@ -243,25 +239,36 @@
             const toast = document.getElementById('custom-toast');
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 2500); 
-          } catch (err) { console.error('복사 실패', err); }
+          } catch (err) {}
           document.body.removeChild(textArea);
         }
       }
 
       function updateDashboard() {
+        // 🚨 새로 추가된 에러 추적 시스템 🚨 (문제가 생기면 빨간 글씨로 띄워줍니다)
         fetch(GOOGLE_APP_SCRIPT_URL)
-          .then(res => res.json())
-          .then(data => {
-            if(data.error) {
-              console.error("백엔드 에러:", data.error);
-              document.getElementById('reviews').innerHTML = `<p style='color:red; text-align:center;'>오류 발생: ${data.error}</p>`;
-              return;
+          .then(res => {
+            if(!res.ok) throw new Error("HTTP 상태 에러: " + res.status);
+            return res.text(); // JSON이 아닌 HTML(구글 에러페이지)이 올 것을 대비해 우선 텍스트로 받음
+          })
+          .then(text => {
+            try {
+              const data = JSON.parse(text);
+              if(data.error) {
+                // 구글 시트 백엔드 내부에서 발생한 에러
+                document.getElementById('reviews').innerHTML = `<p style='color:red; text-align:center; font-weight:bold; padding:20px;'>시트 백엔드 오류:<br>${data.error}</p>`;
+                return;
+              }
+              drawDashboard(data);
+            } catch(e) {
+              // URL 배포가 잘못되어 이상한 페이지(HTML)를 받아왔을 때 발생하는 에러
+              document.getElementById('reviews').innerHTML = `<p style='color:red; text-align:center; font-weight:bold; padding:20px;'>데이터 연동 실패!<br>구글 스크립트 '새 버전 배포'를 다시 진행해주세요.</p>`;
+              console.error("받아온 내용이 JSON이 아닙니다:", text);
             }
-            drawDashboard(data);
           })
           .catch(err => {
-            console.error("데이터 로드 실패", err);
-            document.getElementById('reviews').innerHTML = `<p style='color:red; text-align:center;'>데이터 연결 실패! URL을 확인하세요.</p>`;
+            // 인터넷 연결 문제나 URL 자체가 완전히 잘못되었을 때 발생하는 에러
+            document.getElementById('reviews').innerHTML = `<p style='color:red; text-align:center; font-weight:bold; padding:20px;'>통신 오류 발생:<br>${err.message}<br>인터넷 연결이나 웹앱 주소를 확인하세요.</p>`;
           });
       }
 
@@ -271,7 +278,7 @@
           document.getElementById('notice-bar').style.display = "block";
         } else { document.getElementById('notice-bar').style.display = "none"; }
 
-        // 감상평 렌더링
+        // 1. 감상평 렌더링
         const currentReviewsString = JSON.stringify(data.recentReviews);
         if (lastReviewsDataString !== currentReviewsString) {
           let reviewHtml = data.recentReviews.length === 0 ? "<p style='text-align:center; color:#94a3b8; font-size:1.2em; padding-top:20px;'>이번 달은 아직 등록된 감상평이 없어요!</p>" : "";
@@ -283,7 +290,7 @@
           lastReviewsDataString = currentReviewsString;
         }
 
-        // 시상대 렌더링
+        // 2. 시상대 렌더링
         const stats = data.classStats || [];
         const podiumDiv = document.getElementById('podium');
         
@@ -316,7 +323,6 @@
           }
           podiumDiv.innerHTML = podiumHtml;
 
-          // 4위 이하 랭킹
           let listHtml = ""; 
           let remainders = stats.slice(3);
           remainders.forEach(s => {
@@ -330,7 +336,7 @@
           }
         }
 
-        // 🚨 완벽하게 심플화된 명예의 전당 렌더링 🚨
+        // 3. 명예의 전당 렌더링
         const currentHofString = JSON.stringify(data.hallOfFame);
         if (lastHofDataString !== currentHofString) {
           const hofContainer = document.getElementById('hof-content');
@@ -339,23 +345,21 @@
           } else {
             let hofHtml = "";
 
-            // 1. 역대 통합 1위 (왕중왕) 박스 추가
             if (data.allTimeChampions && data.allTimeChampions.length > 0) {
               let champs = data.allTimeChampions.map(c => `${c.className}`).join(", ");
               let maxCount = data.allTimeChampions[0].count;
               hofHtml += `
                 <div style="background-color: #fefce8; border: 2px solid #fde047; border-radius: 12px; padding: 15px; margin-bottom: 20px;">
-                  <h4 style="font-family: 'Jua', sans-serif; color: #ca8a04; font-size: 1.3em; margin: 0 0 5px 0;">🏆 역대 최고 독서량 🏆</h4>
+                  <h4 style="font-family: 'Jua', sans-serif; color: #ca8a04; font-size: 1.3em; margin: 0 0 5px 0;">🏆 역대 최고 독서량 (왕중왕) 🏆</h4>
                   <div style="font-size: 1.2em; font-weight: 900; color: #1e293b;">${champs} <span style="color: #ea580c; font-size: 0.9em;">(${maxCount}권)</span></div>
                 </div>
               `;
             }
 
-            // 2. 월별 우승 반 리스트 (깔끔한 한 줄 텍스트)
             hofHtml += `<ul class="hof-list">`;
             data.hallOfFame.forEach(item => {
-              // item 구조는 {month: "7월", className: "3학년 1반", count: 123} 형태
-              hofHtml += `<li><span style="font-size: 1.1em;">👑</span> [${item.month}] ${item.className} <span class="hof-cnt">(${item.count}권)</span></li>`;
+              // 🚨 선생님 요청 3: 오직 1위만 심플하게 [7월] X학년 X반 (X권) 형식으로 출력
+              hofHtml += `<li style="justify-content: center;"><span style="font-size: 1.1em;">👑</span> [${item.month}] ${item.className} <span style="color: #ea580c; font-size: 0.9em; margin-left: 5px;">(${item.count}권)</span></li>`;
             });
             hofHtml += `</ul>`;
 
@@ -389,4 +393,3 @@
     </script>
   </body>
 </html>
- 
