@@ -41,8 +41,8 @@
       .podium-medal { font-size: 3.5em; line-height: 1; margin-bottom: 5px; position: absolute; top: -45px; }
       .podium-score { font-family: 'Noto Sans KR', sans-serif; font-size: 2.6em; font-weight: 900; color: #0f172a; margin-bottom: 12px; letter-spacing: -1px; line-height: 1; }
       .podium-score span { font-size: 0.55em; font-weight: 700; color: #475569; margin-left: 2px; }
-      .podium-classes { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 8px; width: 100%; padding: 0 10px; box-sizing: border-box; }
-      .podium-class { font-family: 'Jua', sans-serif; font-size: 1.15em; color: #1e293b; background-color: rgba(255, 255, 255, 0.65); padding: 5px 12px; border-radius: 20px; word-break: keep-all; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 5px; }
+      .podium-classes { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; padding: 0 10px; box-sizing: border-box; }
+      .podium-class { font-family: 'Jua', sans-serif; font-size: 1.15em; color: #1e293b; background-color: rgba(255, 255, 255, 0.65); padding: 5px 12px; border-radius: 20px; word-break: keep-all; box-shadow: 0 2px 5px rgba(0,0,0,0.05); width: 100%; }
       
       .step-1 { height: 210px; background-color: #fde047; box-shadow: 0 -10px 20px rgba(250, 204, 21, 0.4); z-index: 10; width: 180px;}
       .step-2 { height: 150px; background-color: #e2e8f0; }
@@ -74,10 +74,10 @@
       .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px; box-sizing: border-box; backdrop-filter: blur(3px); }
       .modal-content { background: white; padding: 30px; border-radius: 20px; width: 100%; max-width: 400px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.2); text-align: center; }
       .modal-title { font-family: 'Jua', sans-serif; font-size: 1.8em; color: #1e293b; margin-top: 0; margin-bottom: 15px; }
+      
       .os-guide { background: #f8fafc; border-radius: 12px; padding: 15px; margin-bottom: 12px; text-align: left; border-left: 5px solid #3b82f6; }
       .os-title { font-weight: 900; font-size: 1.1em; color: #334155; margin-bottom: 5px; }
       .os-desc { color: #475569; font-size: 0.95em; line-height: 1.4; word-break: keep-all; }
-      .close-btn { background: #e2e8f0; color: #475569; border: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; font-size: 1.1em; cursor: pointer; width: 100%; margin-top: 10px; transition: background 0.2s; }
       
       .hof-month-section { background: #f8fafc; border-radius: 15px; padding: 15px; margin-bottom: 15px; border: 2px solid #e2e8f0; text-align: left; }
       .hof-month-title { font-family: 'Jua', sans-serif; color: #0f172a; font-size: 1.4em; margin: 0 0 10px 0; border-bottom: 2px dashed #cbd5e1; padding-bottom: 5px; }
@@ -85,6 +85,8 @@
       .hof-list li { font-size: 1.15em; font-weight: bold; color: #334155; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
       .hof-list li span.hof-cnt { color: #059669; font-size: 0.9em; background: #d1fae5; padding: 2px 8px; border-radius: 10px; }
 
+      .close-btn { background: #e2e8f0; color: #475569; border: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; font-size: 1.1em; cursor: pointer; width: 100%; margin-top: 10px; transition: background 0.2s; }
+      
       .toast-message { position: fixed; bottom: 50%; left: 50%; transform: translate(-50%, 50%); background: rgba(30, 41, 59, 0.95); color: #4ade80; padding: 15px 30px; border-radius: 30px; font-family: 'Jua', sans-serif; font-size: 1.3em; white-space: nowrap; box-shadow: 0 10px 30px rgba(0,0,0,0.3); opacity: 0; visibility: hidden; transition: opacity 0.3s, transform 0.3s; z-index: 2000; pointer-events: none; }
       .toast-message.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
 
@@ -126,7 +128,6 @@
         .qr-code-img { width: 100px; height: 100px; }
         .qr-sub { font-size: 3.6vw; white-space: nowrap; letter-spacing: -0.5px; }
         
-        /* 모바일용 하단 고정 3단 분할 탭 바 */
         .floating-menu { position: fixed; bottom: 0; left: 0; width: 100%; display: flex; flex-direction: row; z-index: 1000; box-shadow: 0 -4px 15px rgba(0,0,0,0.15); background: white; padding-bottom: env(safe-area-inset-bottom); }
         .fab-btn { flex: 1; display: flex; align-items: center; justify-content: center; padding: 16px 2px; font-family: 'Jua', sans-serif; font-size: min(3.8vw, 1.1em); color: white; border: none; cursor: pointer; text-decoration: none; border-right: 1px solid rgba(255,255,255,0.3); white-space: nowrap; letter-spacing: -0.5px; }
         .fab-btn:last-child { border-right: none; }
@@ -148,7 +149,8 @@
         <h2 class="panel-title" id="podium-title">🏆 재미로 보는 이번 달 독서 챔피언</h2>
         <div class="podium-container" id="podium"></div>
         
-        <button class="hof-btn" onclick="document.getElementById('hofModal').style.display='flex'">👑 명예의 전당 (역대 우승 학급)</button>
+        <!-- 명예의 전당 글씨 수정 완료 -->
+        <button class="hof-btn" onclick="document.getElementById('hofModal').style.display='flex'">👑 명예의 전당</button>
 
         <div class="rank-list-container">
           <ul id="ranking-list" class="rank-list"></ul>
@@ -181,7 +183,8 @@
 
     <div id="hofModal" class="modal-overlay">
       <div class="modal-content" style="max-width: 450px;">
-        <h3 class="modal-title" style="color: #d97706;">👑 역대 챔피언 명예의 전당</h3>
+        <!-- 명예의 전당 모달 타이틀 글씨 수정 완료 -->
+        <h3 class="modal-title" style="color: #d97706;">👑 명예의 전당</h3>
         <p style="color: #64748b; margin-top: -10px; margin-bottom: 20px; font-size: 0.95em;">
           지난달에 가장 책을 많이 읽은 학급들입니다! 👏
         </p>
@@ -220,7 +223,6 @@
       const currentMonth = new Date().getMonth() + 1;
       document.getElementById('podium-title').innerText = `🏆 재미로 보는 ${currentMonth}월 독서 챔피언`;
 
-      // 공유하기 버튼 기능 (모바일 네이티브 공유 or PC 클립보드 복사)
       function shareApp() {
         const shareUrl = "https://kimhaegguji-blip.github.io/ggujilibrary/";
         if (navigator.share && /Mobi|Android/i.test(navigator.userAgent)) {
@@ -243,7 +245,13 @@
       function updateDashboard() {
         fetch(GOOGLE_APP_SCRIPT_URL)
           .then(res => res.json())
-          .then(data => drawDashboard(data))
+          .then(data => {
+            if(data.error) {
+              console.error("백엔드 에러:", data.error);
+              return;
+            }
+            drawDashboard(data);
+          })
           .catch(err => console.error("데이터 로드 실패", err));
       }
 
@@ -265,30 +273,48 @@
           lastReviewsDataString = currentReviewsString;
         }
 
-        // 순위 시상대 렌더링
-        const stats = data.classStats;
+        // 독립 단상 렌더링 로직 (공동 1위, 공동 2위 척척 배치)
+        const stats = data.classStats || [];
         const podiumDiv = document.getElementById('podium');
-        if(!stats || stats.length === 0) {
+        
+        if(stats.length === 0) {
           podiumDiv.innerHTML = "<p style='text-align:center; color:#94a3b8; font-size:1.2em; width:100%;'>독서를 시작해 보세요!</p>";
           document.getElementById('ranking-list').innerHTML = "";
         } else {
-          let rankGroups = { 1: [], 2: [], 3: [] };
-          let listHtml = ""; 
-          stats.forEach(s => {
-            if (s.rank <= 3) rankGroups[s.rank].push(s);
-            else listHtml += `<li class="rank-item"><span class="class-name">${s.rank}위 &nbsp;&nbsp; ${s.className}</span> <span class="score">${s.count}권</span></li>`;
-          });
-
-          function createPodiumStep(rNum, cClass, icon) {
-            if (rankGroups[rNum].length === 0) return `<div class="podium-step ${cClass}" style="visibility:hidden;"></div>`;
-            let score = rankGroups[rNum][0].count; 
-            let classNamesHtml = rankGroups[rNum].map(c => `<div class="podium-class">${c.className}</div>`).join("");
-            let scoreColor = rNum === 1 ? 'color:#1e293b;' : ''; 
-            return `<div class="podium-step ${cClass}"><div class="podium-medal">${icon}</div><div class="podium-score" style="${scoreColor}">${score}<span>권</span></div><div class="podium-classes">${classNamesHtml}</div></div>`;
+          // 상위 3개 반 추출 (순위가 같아도 독립적으로 분리)
+          let top3 = stats.slice(0, 3);
+          
+          function getMedalAndClass(rank) {
+            if(rank === 1) return { m: "🥇", c: "step-1" };
+            if(rank === 2) return { m: "🥈", c: "step-2" };
+            return { m: "🥉", c: "step-3" };
           }
 
-          podiumDiv.innerHTML = createPodiumStep(2, "step-2", "🥈") + createPodiumStep(1, "step-1", "🥇") + createPodiumStep(3, "step-3", "🥉");
-          const currentRanksString = JSON.stringify(stats.filter(s => s.rank > 3));
+          function createPodiumStep(clsData) {
+            if(!clsData) return `<div class="podium-step step-2" style="visibility:hidden;"></div>`;
+            const styleInfo = getMedalAndClass(clsData.rank);
+            const scoreColor = clsData.rank === 1 ? 'color:#1e293b;' : ''; 
+            return `<div class="podium-step ${styleInfo.c}"><div class="podium-medal">${styleInfo.m}</div><div class="podium-score" style="${scoreColor}">${clsData.count}<span>권</span></div><div class="podium-classes"><div class="podium-class">${clsData.className}</div></div></div>`;
+          }
+
+          let podiumHtml = "";
+          if(top3.length === 1) {
+            podiumHtml = createPodiumStep(null) + createPodiumStep(top3[0]) + createPodiumStep(null);
+          } else if (top3.length === 2) {
+            podiumHtml = createPodiumStep(top3[1]) + createPodiumStep(top3[0]) + createPodiumStep(null);
+          } else {
+            podiumHtml = createPodiumStep(top3[1]) + createPodiumStep(top3[0]) + createPodiumStep(top3[2]);
+          }
+          podiumDiv.innerHTML = podiumHtml;
+
+          // 4번째 이후 하위 순위 리스트
+          let listHtml = ""; 
+          let remainders = stats.slice(3);
+          remainders.forEach(s => {
+            listHtml += `<li class="rank-item"><span class="class-name">${s.rank}위 &nbsp;&nbsp; ${s.className}</span> <span class="score">${s.count}권</span></li>`;
+          });
+
+          const currentRanksString = JSON.stringify(remainders);
           if (lastRanksDataString !== currentRanksString) {
             document.getElementById('ranking-list').innerHTML = listHtml;
             lastRanksDataString = currentRanksString;
@@ -307,7 +333,7 @@
               hofHtml += `<div class="hof-month-section"><h4 class="hof-month-title">${monthData.month}</h4><ul class="hof-list">`;
               monthData.topClasses.forEach(cls => {
                 let medal = cls.rank === 1 ? '🥇' : (cls.rank === 2 ? '🥈' : '🥉');
-                hofHtml += `<li>${medal} ${cls.rank}위 - ${cls.className} <span class="hof-cnt">${cls.count}권</span></li>`;
+                hofHtml += `<li>${medal} ${cls.rank}위 - ${cls.className} <span class="hof-cnt">${cls.count}</span></li>`;
               });
               hofHtml += `</ul></div>`;
             });
@@ -317,7 +343,6 @@
         }
       }
 
-      // 부드러운 무한 스크롤 애니메이션
       function scrollTicker(containerId) {
         const container = document.getElementById(containerId);
         if (!container || container.children.length < 2) return;
@@ -335,7 +360,6 @@
         }, 500); 
       }
 
-      // 10초마다 데이터 갱신 및 3초마다 스크롤
       updateDashboard();
       setInterval(updateDashboard, 10000); 
       setInterval(() => scrollTicker('reviews'), 3000);
